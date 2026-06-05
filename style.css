@@ -430,20 +430,19 @@ body {
     font-family: 'Gotham', 'Segoe UI', sans-serif !important;
 }
 
-/* Обновленный стиль полей ввода */
 .custom-input {
     width: 100%;
-    padding: 18px 20px !important; /* Увеличили размер */
+    padding: 10px 16px !important; /* Сильно уменьшили высоту по вертикали */
     background: rgba(0, 0, 0, 0.4) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 14px !important; /* Более закругленные углы */
+    border-radius: 10px !important; /* Уменьшили радиус, чтобы подходило под новую высоту */
     color: white !important;
-    font-size: 15px;
+    font-size: 14px !important; /* Чуть уменьшили текст для гармонии */
     outline: none;
     transition: all 0.3s ease !important;
 }
 
-/* Неоновый контур при нажатии (фокусе) */
+/* Неоновый контур при нажатии (оставляем без изменений) */
 .custom-input:focus {
     border-color: #a855f7 !important;
     box-shadow: 0 0 15px rgba(168, 85, 247, 0.4), 
@@ -480,10 +479,9 @@ body {
     white-space: nowrap;
 }
 
-/* Уменьшаем высоту инпута */
 .small-input {
-    padding: 12px 16px !important; /* Было 18px */
-    font-size: 14px !important;
+    padding: 8px 14px !important; 
+    font-size: 13px !important;
 }
 
 /* Стили для гайда */
