@@ -861,28 +861,113 @@ body {
 }
 
 /* --- БОКОВАЯ ПАНЕЛЬ (SIDEBAR) --- */
+/* --- БОКОВАЯ ПАНЕЛЬ (SIDEBAR) --- */
 .sidebar {
-    width: 190px; /* Еще уже для максимального рабочего пространства */
+    width: 250px; /* Сделали сайдбар шире */
     height: 100vh;
     background: #09090b;
     border-right: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 24px 10px; /* Минимальные отступы для узкого бара */
+    padding: 24px 12px; /* Вернули комфортные внутренние отступы */
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
 }
 
-/* Корректировка логотипа под узкий сайдбар */
 .brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 35px;
-    padding-left: 6px;
+    padding-left: 14px; /* Чуть сдвинули логотип, чтобы он был в уровень с текстом */
 }
 
-.brand span {
-    font-size: 16px; /* Чуть уменьшили размер шрифта ASYNC */
+/* Заголовки категорий (MAIN, CONFIG) */
+.nav-group label {
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.3);
+    margin-left: 18px; /* Выравниваем по новому краю плашек */
+    margin-bottom: 8px;
+    display: block;
+    text-transform: uppercase;
+}
+
+/* --- КОМПАКТНЫЕ ПЛАШКИ --- */
+.nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 8px 10px; /* Уменьшили высоту плашки */
+    margin: 4px 8px; /* ДОБАВИЛИ БОКОВЫЕ ОТСТУПЫ! Теперь плашки не растягиваются на всю ширину */
+    border-radius: 10px; /* Чуть острее углы под меньший размер */
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 13px; /* Сделали шрифт капельку меньше */
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Индикатор выносим за пределы уменьшенной плашки */
+.nav-item::before {
+    content: '';
+    position: absolute;
+    left: -12px; /* Сдвигаем маркер влево в пустое пространство margin'a */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px; 
+    height: 0;
+    background: #a855f7;
+    border-radius: 4px;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Компактный бокс для иконки */
+.icon-box {
+    width: 24px; /* Уменьшили размер квадратика (было 26px) */
+    height: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    flex-shrink: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.icon-box svg {
+    width: 12px; /* Уменьшили саму иконку (было 14px) */
+    height: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Эффект Hover */
+.nav-item:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.02);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* --- АКТИВНОЕ СОСТОЯНИЕ --- */
+.nav-item.active {
+    background: rgba(36, 27, 47, 0.6) !important; 
+    color: #ffffff !important; 
+    font-weight: 600;
+}
+
+.nav-item.active::before {
+    height: 16px; /* Сделали маркер чуть короче, чтобы он гармонировал с узкой плашкой */
+    opacity: 1;
+}
+
+.nav-item.active .icon-box {
+    background: rgba(168, 85, 247, 0.15) !important; 
+    border: 1px solid rgba(168, 85, 247, 0.25) !important;
+}
+
+.nav-item.active .icon-box svg {
+    color: #b57cff !important; 
 }
