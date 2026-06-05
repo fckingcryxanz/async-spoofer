@@ -36,10 +36,48 @@ export function renderSettings() {
                     </div>
                 </section>
 
-                <!-- (Здесь твой остальной код с Account и Open Cloud API Key, который был раньше) -->
+                            <input type="text" id="userid-input" class="custom-input small-input" placeholder="Enter User ID" readonly style="opacity: 0.7; cursor: not-allowed;">
+                        </div>
+                        <div class="input-field">
+                            <label>Cookie (.ROBLOSECURITY)</label>
+                            <input type="password" id="cookie-input" class="custom-input small-input" placeholder="Paste your .ROBLOSECURITY cookie">
+                        </div>
+                        <div class="input-field">
+                            <label>Group ID</label>
+                            <input type="text" class="custom-input small-input" placeholder="Leave blank for personal uploads">
+                        </div>
+                    </div>
+                </section>
+
                 <section class="settings-group">
-                    <!-- ... твои существующие разделы ACCOUNT и API KEY ... -->
-                    <!-- Убедись, что ID input'ов тут такие же: userid-input, cookie-input, api-key-input -->
+                    <div class="section-divider">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3y-3.5"></path></svg>
+                        </div>
+                        <span>OPEN CLOUD API KEY</span>
+                        <div class="line"></div>
+                    </div>
+                    <div class="glass-card settings-card highlight-border">
+                        <div class="input-field">
+                            <label>API Key</label>
+                            <div class="input-row">
+                                <input type="password" id="api-key-input" class="custom-input small-input" placeholder="Paste your Open Cloud API key">
+                                <button class="show-btn" onclick="const input = document.getElementById('api-key-input'); input.type = input.type === 'password' ? 'text' : 'password'; this.innerText = input.type === 'password' ? 'Show' : 'Hide';">Show</button>
+                            </div>
+                        </div>
+                        <div class="button-row">
+                            <button id="get-api-btn" class="primary-btn small">Get API Key</button>
+                            <button id="setup-guide-btn" class="secondary-btn small">? Setup Guide</button>
+                        </div>
+
+                        <div id="guide-content" class="guide-steps" style="display: none;">
+                            <div class="step-card"><div class="step-num">1</div><div class="step-info"><h4>Open Dashboard</h4><p>create.roblox.com/dashboard/credentials</p></div></div>
+                            <div class="step-card"><div class="step-num">2</div><div class="step-info"><h4>Create Key</h4><p>Click 'Create API Key'</p></div></div>
+                            <div class="step-card"><div class="step-num">3</div><div class="step-info"><h4>Permissions</h4><p>Add 'Assets' system</p></div></div>
+                            <div class="step-card"><div class="step-num">4</div><div class="step-info"><h4>Read/Write</h4><p>Enable both checkboxes</p></div></div>
+                            <div class="step-card"><div class="step-num">5</div><div class="step-info"><h4>Done</h4><p>Paste the key above</p></div></div>
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>
