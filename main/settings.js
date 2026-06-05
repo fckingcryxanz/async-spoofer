@@ -4,8 +4,6 @@ export function renderSettings() {
 
     setupAutoUserId();
 
-}
-
     viewport.innerHTML = `
         <div class="page-transition">
             <div class="view-header">
