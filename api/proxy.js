@@ -1,3 +1,13 @@
+import { renderDashboard } from '../main/dashboard.js';
+import { renderStudio } from '../main/studio.js';
+import { renderSettings } from '../main/settings.js';
+
+const pages = {
+    'dashboard': renderDashboard,
+    'studio': renderStudio,
+    'settings': renderSettings
+};
+
 export default async function handler(req, res) {
     // Настройка CORS заголовков, чтобы браузер не блокировал запросы
     res.setHeader('Access-Control-Allow-Credentials', true);
