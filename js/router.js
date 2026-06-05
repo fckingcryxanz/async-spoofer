@@ -1,5 +1,5 @@
-import { renderDashboard } from './modules/main/dashboard.js';
-import { renderStudio } from './modules/main/studio.js';
+import { renderDashboard } from '../main/dashboard.js';
+import { renderStudio } from '../main/studio.js';
 
 const pages = {
     dashboard: renderDashboard,
