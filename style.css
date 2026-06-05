@@ -533,3 +533,51 @@ body {
     font-size: 12px;
     color: rgba(255, 255, 255, 0.4);
 }
+
+/* Контейнер разделителя */
+.section-divider {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+/* Квадратная подложка для иконки */
+.icon-box {
+    width: 32px;
+    height: 32px;
+    background: rgba(168, 85, 247, 0.1); /* Темно-фиолетовый прозрачный */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.icon-box i {
+    color: #a855f7; /* Твой основной фиолетовый */
+    font-size: 14px;
+}
+
+/* Текст заголовка (ACCOUNT PROFILES и т.д.) */
+.section-divider span {
+    font-size: 11px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+/* Длинная тонкая линия после текста */
+.section-divider .line {
+    height: 1px;
+    flex-grow: 1;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
+}
+
+/* Убираем старые отступы у групп, если они были */
+.settings-group {
+    margin-bottom: 40px;
+}
