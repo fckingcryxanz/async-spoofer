@@ -143,3 +143,52 @@ function setupAutoUserId() {
     });
 }
  
+// Функция для определения текста статуса
+function getStatusText(userId, apiKey) {
+    if (!userId && !apiKey) return "No ID set · No key";
+    if (userId && !apiKey) return `User ID: ${userId} · No key`;
+    if (userId && apiKey) return `User ID: ${userId} · API Key: ${apiKey.substring(0, 6)}...`;
+    return "No ID set · No key";
+}
+
+// Функция сохранения профиля
+function setupProfileSaving() {
+    const saveBtn = document.getElementById('save-profile-btn');
+    const profileList = document.getElementById('saved-accounts-list');
+    
+    if (!saveBtn) return;
+
+    saveBtn.onclick = () => {
+        const name = document.getElementById('profile-name-input').value;
+        const userId = document.getElementById('userid-input').value;
+        const apiKey = document.getElementById('api-key-input').value;
+
+        if (!name) {
+            alert("Введите имя профиля!");
+            return;
+        }
+
+        const status = getStatusText(userId, apiKey);
+        const initial = name.charAt(0).toUpperCase();
+
+        // Создаем HTML плашки (как на твоем скриншоте image_3a8945.png)
+        const profileCard = document.createElement('div');
+        profileCard.className = 'glass-card settings-card'; // Добавь свои классы для дизайна
+        profileCard.innerHTML = `
+            <div class="profile-item" style="display: flex; align-items: center; justify-content: space-between; padding: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="avatar">${initial}</div>
+                    <div>
+                        <div style="font-weight: bold;">${name}</div>
+                        <div style="font-size: 0.8em; opacity: 0.6;">${status}</div>
+                    </div>
+                </div>
+                <button class="update-btn">UPDATE</button>
+            </div>
+        `;
+
+        profileList.appendChild(profileCard);
+        // Очищаем инпуты
+        document.getElementById('profile-name-input').value = '';
+    };
+}
