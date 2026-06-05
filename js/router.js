@@ -1,6 +1,14 @@
 import { renderDashboard } from '../main/dashboard.js';
 import { renderStudio } from '../main/studio.js';
-// Если у тебя есть другие файлы (tutorial, settings), импортируй их сюда тоже
+import { renderSettings } from '../main/settings.js'; // Добавь этот импорт
+
+const pages = {
+    dashboard: renderDashboard,
+    studio: renderStudio,
+    settings: renderSettings // Привяжи к ключу 'settings'
+};
+
+// ... остальной код роутера остается прежним
 
 const pages = {
     dashboard: renderDashboard,
