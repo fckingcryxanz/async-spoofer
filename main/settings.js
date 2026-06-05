@@ -105,13 +105,21 @@ function setupAutoUserId() {
     const cookieInput = document.getElementById('cookie-input');
     const userIdInput = document.getElementById('userid-input');
 
-    if (!cookieInput || !userIdInput) return;
+    // Проверка: видит ли скрипт твои инпуты?
+    if (!cookieInput || !userIdInput) {
+        console.error('❌ Ошибка: Инпуты не найдены. Убедись, что у них прописаны id="cookie-input" и id="userid-input"');
+        return;
+    }
+
+    console.log('✅ Скрипт автоопределения успешно запущен!');
 
     cookieInput.addEventListener('input', async (e) => {
         const cookieVal = e.target.value.trim();
 
-        if (cookieVal.includes('_|WARNING:-DO-NOT-SHARE-THIS')) {
+        // Проверяем, что вставили длинную строку (куки Роблокса длиннее 200 символов)
+        if (cookieVal.length > 100) {
             userIdInput.value = 'Loading...';
+            console.log('🔄 Отправка запроса на получение ID...');
 
             try {
                 const response = await fetch('/api/proxy', {
@@ -129,14 +137,19 @@ function setupAutoUserId() {
 
                 if (data && data.id) {
                     userIdInput.value = data.id;
+                    console.log(`✅ Успех! Получен ID: ${data.id}`);
                 } else {
                     userIdInput.value = 'Invalid Cookie';
+                    console.error('❌ Ошибка от Roblox:', data);
                 }
             } catch (error) {
                 userIdInput.value = 'API Error';
+                console.error('❌ Ошибка прокси-сервера (Vercel):', error);
             }
         } else if (cookieVal === '') {
             userIdInput.value = '';
+        } else {
+            console.log('⚠️ Введенный текст слишком короткий для куки');
         }
     });
 }
