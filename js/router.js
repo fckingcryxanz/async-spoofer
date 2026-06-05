@@ -1,14 +1,28 @@
 import { renderDashboard } from '../main/dashboard.js';
 import { renderStudio } from '../main/studio.js';
-import { renderSettings } from '../main/settings.js'; // Добавь этот импорт
+import { renderSettings } from '../main/settings.js';
 
 const pages = {
-    dashboard: renderDashboard,
-    studio: renderStudio,
-    settings: renderSettings // Привяжи к ключу 'settings'
+    'dashboard': renderDashboard,
+    'studio': renderStudio,
+    'settings': renderSettings
 };
 
-// ... остальной код роутера остается прежним
+export function initRouter() {
+    document.querySelectorAll('.nav-item').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const page = e.currentTarget.dataset.page;
+            if (pages[page]) {
+                // Очищаем активные классы
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                // Добавляем активный класс нажатой кнопке
+                e.currentTarget.classList.add('active');
+                // Рендерим страницу
+                pages[page]();
+            }
+        });
+    });
+}
 
 // Находим все кнопки в меню
 const navItems = document.querySelectorAll('.nav-item');
