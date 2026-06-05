@@ -422,3 +422,60 @@ body {
     font-weight: 600;
     cursor: pointer;
 }
+
+/* Подключаем похожий на Gotham шрифт (или используй локальный файл, если есть) */
+@import url('https://fonts.cdnfonts.com/css/gotham');
+
+* {
+    font-family: 'Gotham', 'Segoe UI', sans-serif !important;
+}
+
+/* Обновленный стиль полей ввода */
+.custom-input {
+    width: 100%;
+    padding: 18px 20px !important; /* Увеличили размер */
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 14px !important; /* Более закругленные углы */
+    color: white !important;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease !important;
+}
+
+/* Неоновый контур при нажатии (фокусе) */
+.custom-input:focus {
+    border-color: #a855f7 !important;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.4), 
+                inset 0 0 5px rgba(168, 85, 247, 0.2) !important;
+    background: rgba(168, 85, 247, 0.05) !important;
+}
+
+/* Стили для меток полей */
+.input-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
+/* Настройка группы настроек */
+.settings-card {
+    gap: 25px !important;
+    padding: 30px !important;
+}
+
+/* Фикс для кнопки Show внутри инпута */
+.input-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.show-btn {
+    height: 100%;
+    white-space: nowrap;
+}
