@@ -2,8 +2,7 @@ export function renderSettings() {
     const viewport = document.getElementById('view-port');
     if (!viewport) return;
 
-    // Вставляем HTML
-    viewport.innerHTML = `
+       viewport.innerHTML = `
         <div class="page-transition">
             <div class="view-header">
                 <h1>Settings</h1>
@@ -36,6 +35,17 @@ export function renderSettings() {
                     </div>
                 </section>
 
+                <section class="settings-group">
+                    <div class="section-divider">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </div>
+                        <span>ACCOUNT</span>
+                        <div class="line"></div>
+                    </div>
+                    <div class="glass-card settings-card">
+                        <div class="input-field">
+                            <label>User ID</label>
                             <input type="text" id="userid-input" class="custom-input small-input" placeholder="Enter User ID" readonly style="opacity: 0.7; cursor: not-allowed;">
                         </div>
                         <div class="input-field">
@@ -83,7 +93,8 @@ export function renderSettings() {
         </div>
     `;
 
-    // 1. Логика кнопок
+
+    // Логика кнопок (внутри функции renderSettings)
     const getApiBtn = document.getElementById('get-api-btn');
     if (getApiBtn) getApiBtn.onclick = () => window.open('https://create.roblox.com/dashboard/credentials', '_blank');
 
@@ -97,10 +108,10 @@ export function renderSettings() {
         };
     }
 
-    // 2. ЗАПУСК ИНИЦИАЛИЗАЦИИ ВСЕХ ФУНКЦИЙ
-    setupAutoUserId();      // Авто-заполнение ID
-    setupProfileSaving();   // Логика сохранения профиля
-}
+    // Запускаем автоопределение
+    setupAutoUserId();
+    setupProfileSaving();
+} // ЭТА СКОБКА ЗАКРЫВАЕТ ФУНКЦИЮ renderSettings
 
 function setupAutoUserId() {
     const cookieInput = document.getElementById('cookie-input');
@@ -142,52 +153,3 @@ function setupAutoUserId() {
     });
 }
  
-// Функция для определения текста статуса
-function getStatusText(userId, apiKey) {
-    if (!userId && !apiKey) return "No ID set · No key";
-    if (userId && !apiKey) return `User ID: ${userId} · No key`;
-    if (userId && apiKey) return `User ID: ${userId} · API Key: ${apiKey.substring(0, 6)}...`;
-    return "No ID set · No key";
-}
-
-// Функция сохранения профиля
-function setupProfileSaving() {
-    const saveBtn = document.getElementById('save-profile-btn');
-    const profileList = document.getElementById('saved-accounts-list');
-    
-    if (!saveBtn) return;
-
-    saveBtn.onclick = () => {
-        const name = document.getElementById('profile-name-input').value;
-        const userId = document.getElementById('userid-input').value;
-        const apiKey = document.getElementById('api-key-input').value;
-
-        if (!name) {
-            alert("Введите имя профиля!");
-            return;
-        }
-
-        const status = getStatusText(userId, apiKey);
-        const initial = name.charAt(0).toUpperCase();
-
-        // Создаем HTML плашки (как на твоем скриншоте image_3a8945.png)
-        const profileCard = document.createElement('div');
-        profileCard.className = 'glass-card settings-card'; // Добавь свои классы для дизайна
-        profileCard.innerHTML = `
-            <div class="profile-item" style="display: flex; align-items: center; justify-content: space-between; padding: 10px;">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <div class="avatar">${initial}</div>
-                    <div>
-                        <div style="font-weight: bold;">${name}</div>
-                        <div style="font-size: 0.8em; opacity: 0.6;">${status}</div>
-                    </div>
-                </div>
-                <button class="update-btn">UPDATE</button>
-            </div>
-        `;
-
-        profileList.appendChild(profileCard);
-        // Очищаем инпуты
-        document.getElementById('profile-name-input').value = '';
-    };
-}
