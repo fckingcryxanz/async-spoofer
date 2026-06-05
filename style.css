@@ -78,28 +78,26 @@ body {
     display: flex;
     align-items: center;
     padding: 10px 14px;
-    margin: 4px 0;
+    margin: 6px 0;
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid transparent; /* Заготовка для плавной анимации обводки */
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    color: rgba(255, 255, 255, 0.5); /* Приглушенный текст */
     font-size: 14px;
     font-weight: 500;
 }
 
 /* Активная вкладка */
-.nav-item.active {
-    background: rgba(168, 85, 247, 0.12);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: #fff;
-    box-shadow: inset 0 0 0 1px rgba(168, 85, 247, 0.2);
+.nav-item.active .icon-box {
+    background: #a855f7; /* Фирменный фиолетовый залив */
+    border-color: #a855f7;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
 }
 
-.nav-item.active .icon-box {
-    background: #a855f7;
-    color: #fff;
-    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+/* ФИКС БАГА: Делаем иконку контрастной белой на фиолетовом фоне */
+.nav-item.active .icon-box svg {
+    color: #ffffff !important; 
 }
 
 .icon-box {
@@ -120,8 +118,11 @@ body {
 }
 
 .nav-item:hover:not(.active) {
-    background: rgba(255, 255, 255, 0.03);
-    color: #fff;
+    background: rgba(255, 255, 255, 0.02);
+    color: rgba(255, 255, 255, 0.8);
+}
+.nav-item:hover:not(.active) .icon-box {
+    background: rgba(255, 255, 255, 0.08);
 }
 
 /* --- КОНТЕНТНАЯ ЧАСТЬ (VIEWPORT) --- */
@@ -615,20 +616,23 @@ body {
 
 /* Стили для SVG иконок */
 .icon-box {
-    width: 26px;
-    height: 26px;
-    background: rgba(168, 85, 247, 0.1);
-    border: 1px solid rgba(168, 85, 247, 0.2);
-    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.05); /* Темная аккуратная подложка */
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 14px;
+    flex-shrink: 0;
+    transition: inherit;
 }
-
 .icon-box svg {
     width: 14px;
     height: 14px;
-    color: #a855f7; /* Твой фирменный фиолетовый */
+    color: rgba(255, 255, 255, 0.5); /* Серый цвет, как на макете */
+    transition: inherit;
 }
 
 /* Делаем разделитель и заголовки компактнее */
