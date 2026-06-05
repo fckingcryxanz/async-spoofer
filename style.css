@@ -1,47 +1,174 @@
-/* Базовые настройки на весь экран */
-body {
-    background-color: #0f0f13 !important;
-    color: white;
+/* =========================================
+   ASYNC | iOS 26 Edition - Main Stylesheet
+   ========================================= */
+
+/* --- БАЗОВЫЕ НАСТРОЙКИ --- */
+* {
     margin: 0;
     padding: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden; /* Запрещаем скролл всей страницы */
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Главный контейнер */
+body {
+    background-color: #0f0f13 !important; /* Глубокий темный фон */
+    color: white;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Скролл только внутри контента, а не всей страницы */
+}
+
 .app-container {
     display: flex;
     width: 100%;
     height: 100%;
 }
 
-/* Боковая панель */
+/* --- БОКОВАЯ ПАНЕЛЬ (SIDEBAR) --- */
 .sidebar {
     width: 260px;
     height: 100vh;
     background: #09090b;
     border-right: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    flex-shrink: 0; /* Чтобы меню не сжималось */
+    padding: 24px 20px;
+    flex-shrink: 0; /* Меню не сжимается при уменьшении экрана */
     display: flex;
     flex-direction: column;
 }
 
-/* Зона контента */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    padding-left: 8px;
+}
+
+.logo-icon {
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+}
+
+.brand span {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* --- МЕНЮ НАВИГАЦИИ --- */
+.nav-group {
+    margin-bottom: 28px;
+}
+
+.nav-group label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.3);
+    margin-left: 12px;
+    margin-bottom: 8px;
+    display: block;
+    text-transform: uppercase;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    margin: 4px 0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Активная вкладка */
+.nav-item.active {
+    background: rgba(168, 85, 247, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff;
+    box-shadow: inset 0 0 0 1px rgba(168, 85, 247, 0.2);
+}
+
+.nav-item.active .icon-box {
+    background: #a855f7;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+}
+
+.icon-box {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    margin-right: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: inherit;
+}
+
+.icon-box svg {
+    width: 16px;
+    height: 16px;
+}
+
+.nav-item:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.03);
+    color: #fff;
+}
+
+/* --- КОНТЕНТНАЯ ЧАСТЬ (VIEWPORT) --- */
 #view-port {
     flex: 1; /* Занимает всё оставшееся место */
     height: 100vh;
-    padding: 40px 60px;
-    overflow-y: auto; /* Скролл только у контента, меню стоит на месте */
-    transition: opacity 0.3s ease-in-out; /* Плавность для JS анимации */
+    padding: 50px 60px;
+    overflow-y: auto;
+    transition: opacity 0.3s ease-in-out; /* Для JS анимаций */
     opacity: 1;
 }
 
-/* Сетка для карточек в дашборде (чтобы они были рядом) */
+.view-header {
+    margin-bottom: 35px;
+    animation: fadeInSlide 0.5s ease-out;
+}
+
+.view-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.view-header p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 15px;
+}
+
+/* --- КАРТОЧКИ (GLASSMORPHISM) --- */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 35px;
 }
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-2px);
+    border
