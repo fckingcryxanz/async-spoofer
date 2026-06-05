@@ -2,6 +2,10 @@ export function renderSettings() {
     const viewport = document.getElementById('view-port');
     if (!viewport) return;
 
+    <input type="password" id="cookie-input" class="custom-input small-input" placeholder="_|WARNING:-DO-NOT-SHARE-THIS...">
+
+    <input type="text" id="userid-input" class="custom-input small-input" placeholder="User ID">
+
     viewport.innerHTML = `
         <div class="page-transition">
             <div class="view-header">
