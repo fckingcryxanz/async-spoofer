@@ -2,8 +2,6 @@ export function renderSettings() {
     const viewport = document.getElementById('view-port');
     if (!viewport) return;
 
-    setupAutoUserId();
-
     viewport.innerHTML = `
         <div class="page-transition">
             <div class="view-header">
@@ -86,40 +84,20 @@ export function renderSettings() {
         </div>
     `;
 
-    // Логика кнопок
-    const getApiBtn = document.getElementById('get-api-btn');
-    if (getApiBtn) getApiBtn.onclick = () => window.open('https://create.roblox.com/dashboard/credentials', '_blank');
-
-    const guideBtn = document.getElementById('setup-guide-btn');
-    const guideContent = document.getElementById('guide-content');
-    if (guideBtn && guideContent) {
-        guideBtn.onclick = () => {
-            const isHidden = guideContent.style.display === 'none';
-            guideContent.style.display = isHidden ? 'flex' : 'none';
-            guideBtn.innerText = isHidden ? 'Hide Guide' : '? Setup Guide';
-        };
-    }
+    setupAutoUserId();
 }
 
 function setupAutoUserId() {
     const cookieInput = document.getElementById('cookie-input');
     const userIdInput = document.getElementById('userid-input');
 
-    // Проверка: видит ли скрипт твои инпуты?
-    if (!cookieInput || !userIdInput) {
-        console.error('❌ Ошибка: Инпуты не найдены. Убедись, что у них прописаны id="cookie-input" и id="userid-input"');
-        return;
-    }
-
-    console.log('✅ Скрипт автоопределения успешно запущен!');
+    if (!cookieInput || !userIdInput) return;
 
     cookieInput.addEventListener('input', async (e) => {
         const cookieVal = e.target.value.trim();
 
-        // Проверяем, что вставили длинную строку (куки Роблокса длиннее 200 символов)
         if (cookieVal.length > 100) {
             userIdInput.value = 'Loading...';
-            console.log('🔄 Отправка запроса на получение ID...');
 
             try {
                 const response = await fetch('/api/proxy', {
@@ -137,19 +115,30 @@ function setupAutoUserId() {
 
                 if (data && data.id) {
                     userIdInput.value = data.id;
-                    console.log(`✅ Успех! Получен ID: ${data.id}`);
                 } else {
                     userIdInput.value = 'Invalid Cookie';
-                    console.error('❌ Ошибка от Roblox:', data);
                 }
             } catch (error) {
                 userIdInput.value = 'API Error';
-                console.error('❌ Ошибка прокси-сервера (Vercel):', error);
             }
         } else if (cookieVal === '') {
             userIdInput.value = '';
-        } else {
-            console.log('⚠️ Введенный текст слишком короткий для куки');
         }
     });
 }
+
+    // Логика кнопок
+    const getApiBtn = document.getElementById('get-api-btn');
+    if (getApiBtn) getApiBtn.onclick = () => window.open('https://create.roblox.com/dashboard/credentials', '_blank');
+
+    const guideBtn = document.getElementById('setup-guide-btn');
+    const guideContent = document.getElementById('guide-content');
+    if (guideBtn && guideContent) {
+        guideBtn.onclick = () => {
+            const isHidden = guideContent.style.display === 'none';
+            guideContent.style.display = isHidden ? 'flex' : 'none';
+            guideBtn.innerText = isHidden ? 'Hide Guide' : '? Setup Guide';
+        };
+    }
+}
+
