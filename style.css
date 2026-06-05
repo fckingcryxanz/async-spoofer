@@ -26,12 +26,12 @@ body {
 
 /* --- БОКОВАЯ ПАНЕЛЬ (SIDEBAR) --- */
 .sidebar {
-    width: 260px;
+    width: 220px; /* Уменьшили ширину (было 260px) */
     height: 100vh;
     background: #09090b;
     border-right: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 24px 20px;
-    flex-shrink: 0; /* Меню не сжимается при уменьшении экрана */
+    padding: 24px 16px; /* Чуть сжали отступы для компактности */
+    flex-shrink: 0; 
     display: flex;
     flex-direction: column;
 }
@@ -719,15 +719,26 @@ body {
 }
 
 /* Активация вертикального неонового индикатора */
-.nav-item.active::before {
-    height: 18px; /* Полосочка плавно вырастает до этой высоты */
-    opacity: 1;
+/* Заготовка под вертикальную полоску (БЕЗ СВЕЧЕНИЯ) */
+.nav-item::before {
+    content: '';
+    position: absolute;
+    left: -8px; 
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px; /* Сделал полоску чуть тоньше, чтобы смотрелось элегантнее */
+    height: 0;
+    background: #a855f7; /* Оставляем только чистый цвет */
+    border-radius: 99px;
+    opacity: 0;
+    transition: all 0.25s ease-in-out;
+    /* box-shadow удален */
 }
 
-/* Контейнер иконки при нажатии */
-.nav-item.active .icon-box {
-    background: rgba(168, 85, 247, 0.15) !important; /* Полупрозрачный фиолетовый внутри */
-    border-color: rgba(168, 85, 247, 0.3) !important;
+/* Эффект для самой SVG иконки (БЕЗ СВЕЧЕНИЯ) */
+.nav-item.active .icon-box svg {
+    color: #c084fc !important; /* Яркий фиолетовый цвет остался */
+    /* filter: drop-shadow удален */
 }
 
 /* Эффект свечения для самой SVG иконки */
