@@ -971,3 +971,14 @@ body {
 .nav-item.active .icon-box svg {
     color: #b57cff !important; 
 }
+
+@font-face {
+    font-family: 'Benzin';
+    src: url('/fonts/Benzin-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+body, input, button, label, h1, h2, p, span {
+    font-family: 'Benzin', sans-serif !important;
+}
