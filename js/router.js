@@ -10,13 +10,6 @@ const pages = {
 
 // ... остальной код роутера остается прежним
 
-const pages = {
-    dashboard: renderDashboard,
-    studio: renderStudio
-    // tutorial: renderTutorial,
-    // settings: renderSettings
-};
-
 // Находим все кнопки в меню
 const navItems = document.querySelectorAll('.nav-item');
 const viewport = document.getElementById('view-port');
