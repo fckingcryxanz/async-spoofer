@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASYNC | Web Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">ASYNC</div>
+            <nav>
+                <div class="nav-item active">Settings</div>
+                <div class="nav-item">Dashboard</div>
+                <div class="nav-item">Audio</div>
+            </nav>
+        </aside>
+        
+        <main class="content">
+            <header>
+                <h1>Settings</h1>
+                <p>Configure your Roblox identity and API access</p>
+            </header>
+
+            <section class="card">
+                <h3>Account</h3>
+                <div class="input-group">
+                    <label>Cookie (.ROBLOSECURITY)</label>
+                    <input type="password" id="cookie" placeholder="Paste your cookie here...">
+                    <small>Stored only in your browser's localStorage.</small>
+                </div>
+                <div class="input-group">
+                    <label>Open Cloud API Key</label>
+                    <input type="password" id="apiKey" placeholder="Your API Key">
+                </div>
+                <button id="saveBtn">Save Profile</button>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
