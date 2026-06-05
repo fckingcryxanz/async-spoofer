@@ -1,26 +1,26 @@
-import { renderDashboard } from '../main/dashboard.js';
-import { renderStudio } from '../main/studio.js';
-import { renderSettings } from '../main/settings.js';
+// Этот код должен быть в твоем файле роутера (например, main.js или router.js)
 
-const pages = {
-    'dashboard': renderDashboard,
-    'studio': renderStudio,
-    'settings': renderSettings
-};
+// 1. Находим кнопки в боковом меню (убедись, что ID совпадают с HTML)
+const navDashboard = document.getElementById('nav-dashboard'); // ID твоей кнопки Dashboard
+const navStudio = document.getElementById('nav-studio');       // ID твоей кнопки Studio
+const navSettings = document.getElementById('nav-settings');   // ID твоей кнопки Settings
 
-export function initRouter() {
-    document.querySelectorAll('.nav-item').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const page = e.currentTarget.dataset.page;
-            if (pages[page]) {
-                // Очищаем активные классы
-                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-                // Добавляем активный класс нажатой кнопке
-                e.currentTarget.classList.add('active');
-                // Рендерим страницу
-                pages[page]();
-            }
-        });
+// 2. Привязываем клики к функциям
+if (navDashboard) {
+    navDashboard.addEventListener('click', () => {
+        renderDashboard(); // Вызов функции из dashboard.js
+    });
+}
+
+if (navStudio) {
+    navStudio.addEventListener('click', () => {
+        renderStudio(); // Вызов функции из studio.js
+    });
+}
+
+if (navSettings) {
+    navSettings.addEventListener('click', () => {
+        renderSettings(); // Вызов функции из settings.js
     });
 }
 
