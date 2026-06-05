@@ -644,3 +644,94 @@ body {
     font-size: 12px;
     margin-bottom: 6px;
 }
+
+
+/* =========================================
+   ЭЛИТНЫЙ СТИЛЬ МЕНЮ (ПО РЕФЕРЕНСУ ECLIPSE)
+   ========================================= */
+
+/* --- Базовое состояние вкладки (как на фото 2 и 3) --- */
+.nav-item {
+    position: relative; /* Важно для позиционирования полоски слева */
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    margin: 6px 0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Заготовка под вертикальную полоску (в неактивном состоянии она сжата и невидима) */
+.nav-item::before {
+    content: '';
+    position: absolute;
+    left: -8px; /* Выносим полоску чуть левее самой плашки */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 0; /* Высота 0 для красивого эффекта "вырастания" */
+    background: #a855f7;
+    border-radius: 99px;
+    opacity: 0;
+    transition: all 0.25s ease-in-out;
+    box-shadow: 0 0 10px #a855f7, 0 0 20px rgba(168, 85, 247, 0.6);
+}
+
+/* Квадратный контейнер иконки по умолчанию */
+.icon-box {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    flex-shrink: 0;
+    transition: inherit;
+}
+
+/* Сама SVG иконка */
+.icon-box svg {
+    width: 14px;
+    height: 14px;
+    color: rgba(255, 255, 255, 0.4);
+    transition: inherit;
+}
+
+/* Эффект hover */
+.nav-item:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.02);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+/* --- АКТИВНОЕ СОСТОЯНИЕ (Точно как на image_6dd39f.png) --- */
+.nav-item.active {
+    background: rgba(168, 85, 247, 0.07); /* Мягкая темная фиолетовая подложка */
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Активация вертикального неонового индикатора */
+.nav-item.active::before {
+    height: 18px; /* Полосочка плавно вырастает до этой высоты */
+    opacity: 1;
+}
+
+/* Контейнер иконки при нажатии */
+.nav-item.active .icon-box {
+    background: rgba(168, 85, 247, 0.15) !important; /* Полупрозрачный фиолетовый внутри */
+    border-color: rgba(168, 85, 247, 0.3) !important;
+}
+
+/* Эффект свечения для самой SVG иконки */
+.nav-item.active .icon-box svg {
+    color: #c084fc !important; /* Яркий неоновый фиолетовый */
+    filter: drop-shadow(0 0 4px rgba(168, 85, 247, 0.85)); /* Эффект свечения нитей иконки */
+}
