@@ -2,8 +2,6 @@ import { renderDashboard } from '../main/dashboard.js';
 import { renderStudio } from '../main/studio.js';
 import { renderSettings } from '../main/settings.js';
 
-navSettings.onclick = () => renderSettings();
-
 const pages = {
     'dashboard': renderDashboard,
     'studio': renderStudio,
@@ -37,6 +35,8 @@ navItems.forEach(item => {
         navItems.forEach(i => i.classList.remove('active'));
         // Добавляем класс 'active' только той, на которую кликнули
         item.classList.add('active');
+
+        navSettings.onclick = () => renderSettings();
 
         // 2. ПЛАВНАЯ АНИМАЦИЯ КОНТЕНТА
         const pageKey = item.getAttribute('data-page');
