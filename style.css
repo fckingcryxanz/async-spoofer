@@ -859,3 +859,30 @@ body {
 .nav-item.active .icon-box svg {
     color: #b57cff !important; /* Яркий матовый фиолетовый цвет */
 }
+
+/* --- БОКОВАЯ ПАНЕЛЬ (SIDEBAR) --- */
+.sidebar {
+    width: 190px; /* Еще уже для максимального рабочего пространства */
+    height: 100vh;
+    background: #09090b;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 24px 10px; /* Минимальные отступы для узкого бара */
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Корректировка логотипа под узкий сайдбар */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 35px;
+    padding-left: 6px;
+}
+
+.brand span {
+    font-size: 16px; /* Чуть уменьшили размер шрифта ASYNC */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
