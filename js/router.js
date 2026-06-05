@@ -36,8 +36,6 @@ navItems.forEach(item => {
         // Добавляем класс 'active' только той, на которую кликнули
         item.classList.add('active');
 
-        navSettings.onclick = () => renderSettings();
-
         // 2. ПЛАВНАЯ АНИМАЦИЯ КОНТЕНТА
         const pageKey = item.getAttribute('data-page');
         
