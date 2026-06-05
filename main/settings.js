@@ -2,65 +2,7 @@ export function renderSettings() {
     const viewport = document.getElementById('view-port');
     if (!viewport) return;
 
-    // Логика кнопок (внутри функции renderSettings)
-    const getApiBtn = document.getElementById('get-api-btn');
-    if (getApiBtn) getApiBtn.onclick = () => window.open('https://create.roblox.com/dashboard/credentials', '_blank');
-
-    const guideBtn = document.getElementById('setup-guide-btn');
-    const guideContent = document.getElementById('guide-content');
-    if (guideBtn && guideContent) {
-        guideBtn.onclick = () => {
-            const isHidden = guideContent.style.display === 'none';
-            guideContent.style.display = isHidden ? 'flex' : 'none';
-            guideBtn.innerText = isHidden ? 'Hide Guide' : '? Setup Guide';
-        };
-    }
-
-    // Запускаем автоопределение
-    setupAutoUserId();
-} // ЭТА СКОБКА ЗАКРЫВАЕТ ФУНКЦИЮ renderSettings
-
-function setupAutoUserId() {
-    const cookieInput = document.getElementById('cookie-input');
-    const userIdInput = document.getElementById('userid-input');
-
-    if (!cookieInput || !userIdInput) return;
-
-    cookieInput.addEventListener('input', async (e) => {
-        const cookieVal = e.target.value.trim();
-
-        if (cookieVal.length > 100) {
-            userIdInput.value = 'Loading...';
-
-            try {
-                const response = await fetch('/api/proxy', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'x-roblosecurity': cookieVal
-                    },
-                    body: JSON.stringify({
-                        targetUrl: 'https://users.roblox.com/v1/users/authenticated'
-                    })
-                });
-
-                const data = await response.json();
-
-                if (data && data.id) {
-                    userIdInput.value = data.id;
-                } else {
-                    userIdInput.value = 'Invalid Cookie';
-                }
-            } catch (error) {
-                userIdInput.value = 'API Error';
-            }
-        } else if (cookieVal === '') {
-            userIdInput.value = '';
-        }
-    });
-}
-
-    viewport.innerHTML = `
+       viewport.innerHTML = `
         <div class="page-transition">
             <div class="view-header">
                 <h1>Settings</h1>
@@ -141,3 +83,63 @@ function setupAutoUserId() {
             </div>
         </div>
     `;
+
+
+    // Логика кнопок (внутри функции renderSettings)
+    const getApiBtn = document.getElementById('get-api-btn');
+    if (getApiBtn) getApiBtn.onclick = () => window.open('https://create.roblox.com/dashboard/credentials', '_blank');
+
+    const guideBtn = document.getElementById('setup-guide-btn');
+    const guideContent = document.getElementById('guide-content');
+    if (guideBtn && guideContent) {
+        guideBtn.onclick = () => {
+            const isHidden = guideContent.style.display === 'none';
+            guideContent.style.display = isHidden ? 'flex' : 'none';
+            guideBtn.innerText = isHidden ? 'Hide Guide' : '? Setup Guide';
+        };
+    }
+
+    // Запускаем автоопределение
+    setupAutoUserId();
+} // ЭТА СКОБКА ЗАКРЫВАЕТ ФУНКЦИЮ renderSettings
+
+function setupAutoUserId() {
+    const cookieInput = document.getElementById('cookie-input');
+    const userIdInput = document.getElementById('userid-input');
+
+    if (!cookieInput || !userIdInput) return;
+
+    cookieInput.addEventListener('input', async (e) => {
+        const cookieVal = e.target.value.trim();
+
+        if (cookieVal.length > 100) {
+            userIdInput.value = 'Loading...';
+
+            try {
+                const response = await fetch('/api/proxy', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-roblosecurity': cookieVal
+                    },
+                    body: JSON.stringify({
+                        targetUrl: 'https://users.roblox.com/v1/users/authenticated'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data && data.id) {
+                    userIdInput.value = data.id;
+                } else {
+                    userIdInput.value = 'Invalid Cookie';
+                }
+            } catch (error) {
+                userIdInput.value = 'API Error';
+            }
+        } else if (cookieVal === '') {
+            userIdInput.value = '';
+        }
+    });
+}
+ 
