@@ -112,11 +112,6 @@ const getApiBtn = document.getElementById('get-api-btn');
     setupProfileSaving();   // Логика сохранения профиля
 }
 
-    // Запускаем автоопределение
-    setupAutoUserId();
-    setupProfileSaving();
-} // ЭТА СКОБКА ЗАКРЫВАЕТ ФУНКЦИЮ renderSettings
-
 function setupAutoUserId() {
     const cookieInput = document.getElementById('cookie-input');
     const userIdInput = document.getElementById('userid-input');
