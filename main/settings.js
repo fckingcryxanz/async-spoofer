@@ -88,6 +88,55 @@ export function renderSettings() {
         </div>
     `;
 
+    // Функция инициализации автодетекта (вызывай её при открытии вкладки Settings)
+function setupAutoUserId() {
+    const cookieInput = document.getElementById('cookie-input');
+    const userIdInput = document.getElementById('userid-input');
+
+    if (!cookieInput || !userIdInput) return;
+
+    // Слушаем изменения в поле куки
+    cookieInput.addEventListener('input', async (e) => {
+        const cookieVal = e.target.value.trim();
+
+        // Проверяем, что вставлен похожий на правду .ROBLOSECURITY
+        if (cookieVal.includes('_|WARNING:-DO-NOT-SHARE-THIS')) {
+            // Показываем пользователю, что процесс пошел
+            userIdInput.value = 'Загрузка...';
+
+            try {
+                // Отправляем запрос на ТВОЙ прокси
+                const response = await fetch('/api/proxy', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-roblosecurity': cookieVal // Передаем куки в кастомном заголовке!
+                    },
+                    body: JSON.stringify({
+                        targetUrl: 'https://users.roblox.com/v1/users/authenticated'
+                    })
+                });
+
+                const data = await response.json();
+
+                // Если Роблокс ответил успешно и вернул ID
+                if (data && data.id) {
+                    userIdInput.value = data.id;
+                    // Для красоты можем даже в консоль вывести имя
+                    console.log(`Успешно авторизован как: ${data.displayName} (@${data.name})`);
+                } else {
+                    userIdInput.value = 'Ошибка: Невалидный Cookie';
+                }
+            } catch (error) {
+                console.error('Ошибка при получении User ID:', error);
+                userIdInput.value = 'Ошибка соединения';
+            }
+        } else if (cookieVal === '') {
+            userIdInput.value = ''; // Очищаем, если стерли куки
+        }
+    });
+}
+
     // Логика кнопок
     const getApiBtn = document.getElementById('get-api-btn');
     if (getApiBtn) getApiBtn.onclick = () => window.open('https://create.roblox.com/dashboard/credentials', '_blank');
