@@ -1,47 +1,61 @@
 export default async function handler(req, res) {
-    const { targetUrl, method, headers, body } = req.body;
-
-export default async function handler(req, res) {
-    // Разрешаем CORS
+    // Настройка CORS заголовков, чтобы браузер не блокировал запросы
+    res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-roblosecurity');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+    res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, x-roblosecurity');
 
+    // Обработка предварительного запроса браузера (Preflight)
     if (req.method === 'OPTIONS') {
-        return res.status(200).end();
+        res.status(200).end();
+        return;
+    }
+
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method not allowed' });
     }
 
     try {
-        const { targetUrl } = req.body; // Получаем URL из тела POST-запроса
-        const robloSecurity = req.headers['x-roblosecurity']; // Получаем куки из нашего кастомного заголовка
+        const { targetUrl } = req.body;
+        const roblosecurityCookie = req.headers['x-roblosecurity'];
 
-        if (!targetUrl) {
-            return res.status(400).json({ error: 'targetUrl is required' });
+        if (!roblosecurityCookie) {
+            return res.status(400).json({ error: 'Missing x-roblosecurity header' });
         }
 
-        // Настраиваем заголовки для реального запроса к Roblox
-        const fetchHeaders = {
-            'User-Agent': 'RobloxStudio/WinInet', // Маскируемся под Студию
-            'Accept': 'application/json'
-        };
-
-        // Если с фронта прилетел куки, подставляем его в правильном формате
-        if (robloSecurity) {
-            fetchHeaders['Cookie'] = `.ROBLOSECURITY=${robloSecurity}`;
-        }
-
-        // Делаем запрос к самому Роблоксу
+        // Делаем запрос к серверам Roblox от имени сервера Vercel
         const robloxResponse = await fetch(targetUrl, {
             method: 'GET',
-            headers: fetchHeaders
+            headers: {
+                // Важно передать куки именно в таком формате
+                'Cookie': `.ROBLOSECURITY=${roblosecurityCookie}`,
+                'Accept': 'application/json',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            }
         });
 
-        const data = await robloxResponse.json();
+        // Читаем ответ как текст, чтобы избежать краша при пустом или не-JSON ответе
+        const responseText = await robloxResponse.text();
         
-        // Возвращаем ответ Роблокса обратно на наш фронтенд
-        return res.status(robloxResponse.status).json(data);
+        let responseData;
+        try {
+            responseData = JSON.parse(responseText);
+        } catch (e) {
+            // Если Roblox вернул ошибку в виде обычного текста или HTML
+            return res.status(robloxResponse.status).json({ 
+                error: 'Roblox returned non-JSON response', 
+                raw: responseText 
+            });
+        }
+
+        // Возвращаем фронтенду ответ от Roblox с тем же HTTP-статусом
+        return res.status(robloxResponse.status).json(responseData);
 
     } catch (error) {
-        return res.status(500).json({ error: 'Proxy Server Error', details: error.message });
+        console.error('Proxy Error:', error);
+        return res.status(500).json({ 
+            error: 'Internal Server Error', 
+            message: error.message 
+        });
     }
 }
