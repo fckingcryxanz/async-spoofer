@@ -63,6 +63,7 @@ export function renderSettings() {
     setupAutoUserId();      // Авто-заполнение ID
     setupProfileSaving();   // Логика сохранения профиля
 }
+
 function setupAutoUserId() {
     const cookieInput = document.getElementById('cookie-input');
     const userIdInput = document.getElementById('userid-input');
