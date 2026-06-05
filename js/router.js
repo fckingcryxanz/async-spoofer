@@ -2,6 +2,8 @@ import { renderDashboard } from '../main/dashboard.js';
 import { renderStudio } from '../main/studio.js';
 import { renderSettings } from '../main/settings.js';
 
+navSettings.onclick = () => renderSettings();
+
 const pages = {
     'dashboard': renderDashboard,
     'studio': renderStudio,
