@@ -973,12 +973,12 @@ body {
 }
 
 @font-face {
-    font-family: 'Benzin';
-    src: url('/fonts/Benzin-Bold.ttf') format('truetype');
+    font-family: 'Gotham';
+    src: url('/fonts/Gotham Regular.otf') format('truetype');
     font-weight: 700;
     font-style: normal;
 }
 
 body, input, button, label, h1, h2, p, span {
-    font-family: 'Benzin', sans-serif !important;
+    font-family: 'Gotham', sans-serif !important;
 }
