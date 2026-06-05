@@ -746,3 +746,116 @@ body {
     color: #c084fc !important; /* Яркий неоновый фиолетовый */
     filter: drop-shadow(0 0 4px rgba(168, 85, 247, 0.85)); /* Эффект свечения нитей иконки */
 }
+
+
+.sidebar {
+    width: 190px; /* Еще уже для максимального рабочего пространства */
+    height: 100vh;
+    background: #09090b;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 24px 10px; /* Минимальные отступы для узкого бара */
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Корректировка логотипа под узкий сайдбар */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 35px;
+    padding-left: 6px;
+}
+
+.brand span {
+    font-size: 16px; /* Чуть уменьшили размер шрифта ASYNC */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* =========================================
+   НОВЫЙ СТИЛЬ ПЛАШЕК ПО РЕФЕРЕНСУ ECLIPSE
+   ========================================= */
+
+/* Базовое (неактивное) состояние */
+.nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    margin: 4px 0;
+    border-radius: 12px; /* Мягкое скругление углов плашки */
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.4); /* Тусклый серый для неактивных */
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Нативный вертикальный индикатор слева */
+.nav-item::before {
+    content: '';
+    position: absolute;
+    left: -6px; /* Небольшой аккуратный отступ от плашки */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px; /* Плотный и четкий маркер */
+    height: 0;
+    background: #a855f7;
+    border-radius: 4px;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Маленький квадратный контейнер для иконки */
+.icon-box {
+    width: 26px;
+    height: 26px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    flex-shrink: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.icon-box svg {
+    width: 14px;
+    height: 14px;
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Эффект Hover (наведение мыши) */
+.nav-item:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.02);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* --- АКТИВНОЕ СОСТОЯНИЕ (Копия image_6dc8c1.png) --- */
+.nav-item.active {
+    background: rgba(36, 27, 47, 0.6) !important; /* Глубокий темно-фиолетовый бэкграунд плашки */
+    color: #ffffff !important; /* Насыщенный белый текст */
+    font-weight: 600;
+}
+
+/* Оживляем маркер слева */
+.nav-item.active::before {
+    height: 20px; /* Высота полоски в активном состоянии */
+    opacity: 1;
+}
+
+/* Иконка-бокс при активации */
+.nav-item.active .icon-box {
+    background: rgba(168, 85, 247, 0.15) !important; /* Выделяющийся фиолетовый фон подложки */
+    border: 1px solid rgba(168, 85, 247, 0.25) !important;
+}
+
+/* Сама SVG внутри активного бокса */
+.nav-item.active .icon-box svg {
+    color: #b57cff !important; /* Яркий матовый фиолетовый цвет */
+}
