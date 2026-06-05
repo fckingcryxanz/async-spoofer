@@ -94,8 +94,7 @@ export function renderSettings() {
     `;
 
 
-    // Логика кнопок (внутри функции renderSettings)
-    const getApiBtn = document.getElementById('get-api-btn');
+const getApiBtn = document.getElementById('get-api-btn');
     if (getApiBtn) getApiBtn.onclick = () => window.open('https://create.roblox.com/dashboard/credentials', '_blank');
 
     const guideBtn = document.getElementById('setup-guide-btn');
@@ -107,6 +106,11 @@ export function renderSettings() {
             guideBtn.innerText = isHidden ? 'Hide Guide' : '? Setup Guide';
         };
     }
+
+    // 2. ЗАПУСК ИНИЦИАЛИЗАЦИИ ВСЕХ ФУНКЦИЙ
+    setupAutoUserId();      // Авто-заполнение ID
+    setupProfileSaving();   // Логика сохранения профиля
+}
 
     // Запускаем автоопределение
     setupAutoUserId();
