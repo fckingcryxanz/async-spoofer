@@ -85,7 +85,6 @@ export function renderSettings() {
     `;
 
     setupAutoUserId();
-}
 
 function setupAutoUserId() {
     const cookieInput = document.getElementById('cookie-input');
