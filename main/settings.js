@@ -2,7 +2,7 @@ export function renderSettings() {
     const viewport = document.getElementById('view-port');
     if (!viewport) return;
 
-       viewport.innerHTML = `
+viewport.innerHTML = `
         <div class="page-transition">
             <div class="view-header">
                 <h1>Settings</h1>
