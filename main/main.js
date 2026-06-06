@@ -1,6 +1,5 @@
-// Импортируй сюда функции рендеринга, если они нужны
-// import { renderDashboard } from './dashboard.js';
-// import { renderSettings } from './settings.js';
+import { renderDashboard } from './dashboard.js';
+import { renderSettings } from './settings.js';
 
 export const MainModule = {
     init: () => {
