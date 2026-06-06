@@ -1211,3 +1211,39 @@ body, input, button, label, h1, h2, p, span {
     font-family: 'Inter', 'Segoe UI', Roboto, sans-serif !important;
     text-transform: none !important;
 }
+
+/* --- СТИЛИ ДЛЯ НОВОГО ЛОГОТИПА --- */
+
+/* Контейнер для выравнивания картинки и текста */
+.sidebar-logo-block {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Расстояние между картинкой и текстом */
+    padding: 20px;
+}
+
+/* Сама картинка логотипа */
+.custom-sidebar-logo {
+    width: 45px;          /* Оптимальный размер для сайдбара */
+    height: 45px;
+    border-radius: 12px;  /* Слегка скругляем углы квадрата */
+    object-fit: cover;    /* Картинка не будет сплющиваться */
+    /* Добавляем фиолетовое свечение под цвет логотипа */
+    box-shadow: 0 0 15px rgba(185, 103, 255, 0.4); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Эффект при наведении мышкой на логотип */
+.custom-sidebar-logo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(185, 103, 255, 0.7);
+}
+
+/* Стили для текста "Async" (если ты его оставил) */
+.sidebar-brand-text {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    font-family: 'Inter', sans-serif;
+}
