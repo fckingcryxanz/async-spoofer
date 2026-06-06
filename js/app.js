@@ -3,8 +3,8 @@ import { initRouter } from './router.js';
 
 export function loadMainApp() {
     const root = document.getElementById('root');
-    
-    // Твой HTML-код панели
+
+root.innerHTML = 
 `
 <div class="app-container">
     <aside class="sidebar">
