@@ -1,7 +1,15 @@
 // js/dashboard.js
 export function renderDashboard() {
+    console.log("-> Функция renderDashboard вызвана!");
+
     const viewport = document.getElementById('view-port');
-    if (!viewport) return;
+    
+    if (!viewport) {
+        console.error("-> ОШИБКА: Элемент с id='view-port' не найден в HTML! Проверь index.html");
+        return;
+    }
+
+    console.log("-> Элемент #view-port найден, начинаем рендер...");
 
     // 1. Загрузка актуальных данных из localStorage
     const stats = JSON.parse(localStorage.getItem('async_stats')) || {
@@ -11,7 +19,6 @@ export function renderDashboard() {
         lastRun: 'Never'
     };
 
-    // Проверяем roblox_account, если пустой — берем дефолтные заглушки
     const user = JSON.parse(localStorage.getItem('roblox_account')) || {
         name: 'chief',
         handle: '3xtiga',
@@ -116,8 +123,8 @@ export function renderDashboard() {
         </div>
     `;
 
-    // Жёстко заставляем браузер показать контент, убирая прозрачность и скрытие
     viewport.style.opacity = '1';
-    viewport.style.display = 'block'; 
+    viewport.style.display = 'block';
     viewport.style.visibility = 'visible';
+    console.log("-> Рендер успешно завершен, стили видимости применены!");
 }
