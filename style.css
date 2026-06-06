@@ -1799,3 +1799,18 @@ body, html {
 .profile-card.empty .icon-box {
     margin-bottom: 10px; /* Отступ между иконкой и текстом */
 }
+
+/* Убедись, что пункт меню - это flex-контейнер */
+.nav-item {
+    display: flex;
+    align-items: center;       /* Центрирует по вертикали */
+    justify-content: space-between; /* Текст слева, иконка справа */
+    padding: 10px 15px;
+}
+
+/* Фиксируем размер иконки, чтобы она не ломала верстку */
+.nav-item svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0; /* Не дает иконке сжиматься */
+}
