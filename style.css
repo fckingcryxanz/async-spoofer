@@ -972,6 +972,37 @@ body {
     color: #b57cff !important; 
 }
 
+/* Иконки */
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+/* Неоновый зеленый рестарт */
+.refresh-icon { fill: #00ff80; filter: drop-shadow(0 0 5px #00ff80); }
+.refresh-icon:hover { filter: drop-shadow(0 0 8px #00ff80); transform: rotate(180deg); }
+
+/* Неоновый красный крестик */
+.delete-icon { fill: #555; transition: 0.3s; }
+.delete-icon:hover { fill: #ff0044; filter: drop-shadow(0 0 5px #ff0044); }
+
+/* Карточка профиля */
+.profile-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/Gotham Bold.otf') format('truetype');
