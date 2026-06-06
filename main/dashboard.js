@@ -5,7 +5,29 @@ export function renderDashboard() {
     window.history.pushState(null, null, '/dash');
 
     const viewport = document.getElementById('view-port');
+   // Внутри renderDashboard()
     const robloxData = JSON.parse(localStorage.getItem('roblox_account'));
+
+// Логика отрисовки профиля
+const profileContent = robloxData ? `
+    <div class="profile-card">
+        <img src="${robloxData.avatarUrl}" alt="Avatar">
+        <div class="profile-info">
+            <h3>${robloxData.name} (@${robloxData.handle})</h3>
+            <p>ID: ${robloxData.id}</p>
+        </div>
+        <div class="status-badge">● Online</div>
+    </div>
+` : `
+    <div class="profile-card empty">
+        <div class="icon-box"> <!-- Здесь будет грустная иконка -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
+            </svg>
+        </div>
+        <h3>Empty</h3>
+    </div>
+`;
 
     // SVG иконки для Overview
     const icons = {
