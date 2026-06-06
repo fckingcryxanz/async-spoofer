@@ -1247,3 +1247,113 @@ body, input, button, label, h1, h2, p, span {
     letter-spacing: 1px;
     font-family: 'Inter', sans-serif;
 }
+
+.login-page-wrapper {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at center, #140d24 0%, #07050b 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* Поверх всего */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.login-container-split {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr; /* Изменили пропорции и расположение */
+    gap: 30px;
+    max-width: 950px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .login-container-split { grid-template-columns: 1fr; }
+}
+
+/* Карточка входа ТЕПЕРЬ СЛЕВА */
+.auth-main-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(185, 103, 255, 0.15);
+    box-shadow: 0 0 40px rgba(138, 43, 226, 0.1);
+    border-radius: 16px;
+    padding: 40px;
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Карточка информации ТЕПЕРЬ СПРАВА */
+.info-side-card {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Кнопки авторизации */
+.discord-login-btn {
+    background: #5865F2;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+    text-decoration: none;
+}
+.discord-login-btn:hover {
+    background: #4752C4;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+}
+
+.discord-join-btn {
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.discord-join-btn:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
+}
+
+/* Информационные плашки */
+.feature-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255,255,255,0.02);
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+.stats-inline-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
