@@ -5,48 +5,57 @@ export function loadMainApp() {
     const root = document.getElementById('root');
     
     // Твой HTML-код панели
-    root.innerHTML = `
-    <div class="app-container">
-        <aside class="sidebar">
-            <div class="sidebar-logo-block">
-                <img src="https://i.postimg.cc/L41NZ4nD/logo.png" alt="Async Logo" class="custom-sidebar-logo">
-                <span class="sidebar-brand-text">Async</span>
-            </div>
+`
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="sidebar-logo-block">
+            <img src="https://i.postimg.cc/L41NZ4nD/logo.png" alt="Async Logo" class="custom-sidebar-logo">
+            <span class="sidebar-brand-text">Async</span>
+        </div>
 
-            <div class="nav-group">
-                <label>MAIN</label>
-                <div class="nav-item active" data-page="dashboard">
-                    <div class="icon-box">...svg...</div>
-                    <span>Dashboard</span>
+        <div class="nav-group">
+            <label>MAIN</label>
+            <div class="nav-item active" data-page="dashboard" id="tab-dashboard">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
                 </div>
-                <div class="nav-item" data-page="tutorial">
-                    <div class="icon-box">...svg...</div>
-                    <span>Tutorial</span>
-                </div>
-                <div class="nav-item" data-page="studio">
-                    <div class="icon-box">...svg...</div>
-                    <span>Studio</span>
-                </div>
+                <span>Dashboard</span>
             </div>
-
-            <div class="nav-group">
-                <label>CONFIG</label>
-                <div class="nav-item" data-page="hub">
-                    <div class="icon-box">...svg...</div>
-                    <span>Hub</span>
+            <div class="nav-item" data-page="tutorial" id="tab-tutorial">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l14 9-14 9V3z"/></svg>
                 </div>
-                <div class="nav-item" data-page="settings">
-                    <div class="icon-box">...svg...</div>
-                    <span>Settings</span>
-                </div>
+                <span>Tutorial</span>
             </div>
-        </aside>
+            <div class="nav-item" data-page="studio" id="tab-studio">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <span>Studio</span>
+            </div>
+        </div>
 
-        <main id="view-port">
-            <!-- Сюда подгружается контент -->
-        </main>
-    </div>
-    `;
+        <div class="nav-group">
+            <label>CONFIG</label>
+            <div class="nav-item" data-page="hub" id="tab-hub">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <span>Hub</span>
+            </div>
+            <div class="nav-item" data-page="settings" id="tab-settings">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </div>
+                <span>Settings</span>
+            </div>
+        </div>
+    </aside>
+
+    <main id="view-port">
+    </main>
+</div>
+`
 
     // Запускаем навигацию
     initRouter();
