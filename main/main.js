@@ -1,15 +1,21 @@
 export const MainModule = {
-    init: () => {
-        console.log("Main Module Loaded");
-    },
-    
-    // Новая функция для навигации
+   // Пример подключения события для кнопки меню
+document.getElementById('nav-dashboard').onclick = () => {
+    MainModule.navigate('/dash', renderDashboard);
+};
+
+document.getElementById('nav-settings').onclick = () => {
+    MainModule.navigate('/settings', renderSettings);
+};
     navigate: (path, renderFunction) => {
         window.history.pushState(null, '', path);
         if (renderFunction) renderFunction();
     },
-
-    // Функция для создания стандартных карточек
+    
+    init: () => {
+        console.log("Main Module Loaded");
+    },
+    
     createCard: (title, content) => {
         return `
             <div class="glass-card">
