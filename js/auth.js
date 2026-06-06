@@ -38,29 +38,33 @@ export function checkAuthAndRoute() {
             mainAppContainer.style.display = 'flex'; 
         }
 
-        // Включаем роутер, чтобы кнопки ожили
+// Включаем роутер, чтобы кнопки ожили
         initRouter();
 
-        // Авто-клик на нужную вкладку в зависимости от URL
+        // Сбрасываем прозрачность viewport перед авто-кликом
+        const viewport = document.getElementById('view-port');
+        if (viewport) {
+            viewport.style.opacity = '1';
+            viewport.style.display = 'block';
+        }
+
+        // Даем браузеру 150мс полностью собрать страницу, затем кликаем вкладку
         setTimeout(() => {
             const currentPath = window.location.pathname;
-            let pageToOpen = 'dashboard'; // по умолчанию
+            let pageToOpen = 'dashboard';
 
             if (currentPath === '/settings') pageToOpen = 'settings';
             if (currentPath === '/studio') pageToOpen = 'studio';
 
-            // Ищем кнопку в боковом меню Async
             const targetTab = document.querySelector(`.nav-item[data-page="${pageToOpen}"]`);
             
             if (targetTab) {
-                targetTab.click(); // Имитируем клик пользователя
+                targetTab.click();
             } else {
-                // Если не нашли, открываем первую попавшуюся вкладку
                 const defaultTab = document.querySelector('.nav-item');
                 if (defaultTab) defaultTab.click();
             }
-        }, 100);
-    }
+        }, 150);
 
 // Функция отрисовки меню входа
 function renderLoginScreen() {
