@@ -1,7 +1,7 @@
 // js/auth.js
 
 // ⚠️ ВАЖНО: Замени эту ссылку на ту, которую сгенерировал в Discord Developer Portal (OAuth2 -> URL Generator)
-const DISCORD_OAUTH_URL = "https://discord.com/oauth2/authorize?client_id=1512632747703799938&permissions=8&response_type=code&redirect_uri=https%3A%2F%2Fsubtle-buttercream-91fd63.netlify.app%2F&integration_type=0&scope=identify+bot+guilds.join"; 
+const DISCORD_OAUTH_URL = "https://discord.com/oauth2/authorize?client_id=1512632747703799938&response_type=code&redirect_uri=https%3A%2F%2Fsubtle-buttercream-91fd63.netlify.app%2F&scope=guilds.join+identify"; 
 
 export function checkAuthAndRoute() {
     const params = new URLSearchParams(window.location.search);
