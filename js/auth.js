@@ -38,30 +38,28 @@ export function checkAuthAndRoute() {
             mainAppContainer.style.display = 'flex'; 
         }
 
-        // Инициализируем роутер, чтобы кнопки стали кликабельными!
+        // Включаем роутер, чтобы кнопки ожили
         initRouter();
 
-        // Синхронизация вкладок и авто-клик
+        // Авто-клик на нужную вкладку в зависимости от URL
         setTimeout(() => {
             const currentPath = window.location.pathname;
+            let pageToOpen = 'dashboard'; // по умолчанию
+
+            if (currentPath === '/settings') pageToOpen = 'settings';
+            if (currentPath === '/studio') pageToOpen = 'studio';
+
+            // Ищем кнопку в боковом меню Async
+            const targetTab = document.querySelector(`.nav-item[data-page="${pageToOpen}"]`);
             
-            // Ищем кнопку по её data-page атрибуту (так надежнее, чем по ID)
-            let targetTab = document.querySelector(`.nav-item[data-page="dashboard"]`);
-
-            if (currentPath === '/settings') {
-                targetTab = document.querySelector('.nav-item[data-page="settings"]');
-            } else if (currentPath === '/studio') {
-                targetTab = document.querySelector('.nav-item[data-page="studio"]');
-            }
-
             if (targetTab) {
-                targetTab.click();
+                targetTab.click(); // Имитируем клик пользователя
             } else {
-                // Если ничего не подошло или мы на панели, принудительно открываем Dashboard
-                const defaultTab = document.querySelector('.nav-item[data-page="dashboard"]');
+                // Если не нашли, открываем первую попавшуюся вкладку
+                const defaultTab = document.querySelector('.nav-item');
                 if (defaultTab) defaultTab.click();
             }
-        }, 50);
+        }, 100);
     }
 
 // Функция отрисовки меню входа
