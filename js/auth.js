@@ -1,71 +1,35 @@
-
 // js/auth.js
-import { loadMainApp } from './app.js'; // Импортируем новый файл
 
-// ... (код проверки авторизации и renderLogin оставляем без изменений) ...
+const overlay = document.getElementById('auth-overlay');
 
-// В функции initApp заменяем loadMainApp на вызов:
-function loadMainApp() {
-    // Импортируем и вызываем создание панели
-    import('./app.js').then(module => {
-        module.loadMainApp();
-    });
-}
-
-const DISCORD_OAUTH_URL = "https://discord.com/oauth2/authorize?client_id=1512632747703799938&response_type=code&redirect_uri=https%3A%2F%2Fsubtle-buttercream-91fd63.netlify.app%2F&scope=guilds.join+identify";
-
-// Проверка состояния
-export function initApp() {
+function checkAuth() {
     const isAuth = localStorage.getItem('is_authenticated') === 'true';
-    const isDiscord = localStorage.getItem('discord_verified') === 'true';
-    const root = document.getElementById('root');
 
-    if (!isAuth && !isDiscord) {
-        renderLogin(1); // Шаг 1: Discord
-    } else if (!isAuth && isDiscord) {
-        renderLogin(2); // Шаг 2: Ключ
+    if (isAuth) {
+        // Если авторизован, просто убираем шторку
+        overlay.style.display = 'none';
     } else {
-        loadMainApp(); // Загрузка самой панели
+        // Если нет — рендерим красивый вход прямо в шторку
+        renderLoginScreen();
     }
 }
 
-function renderLogin(step) {
-    const root = document.getElementById('root');
-    root.innerHTML = `
-        <div class="login-page">
-            <div class="auth-card">
-                <div class="auth-title">${step === 1 ? 'Connect Discord' : 'Enter License'}</div>
-                <div class="auth-subtitle">Async Web Edition — Secure Access</div>
-                ${step === 1 ? 
-                    `<a href="${DISCORD_OAUTH_URL}" class="modern-btn" style="text-decoration:none; display:block;">Login with Discord</a>` :
-                    `<input type="text" id="license-key" class="modern-input" placeholder="XXXXX-XXXXX-XXXXX">
-                     <button id="submit-key" class="modern-btn">Authenticate</button>`
-                }
+function renderLoginScreen() {
+    overlay.innerHTML = `
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #050505;">
+            <div style="background: rgba(12, 12, 12, 0.8); padding: 40px; border-radius: 20px; border: 1px solid #333; text-align: center; max-width: 400px; width: 90%;">
+                <h2 style="color: white; margin-bottom: 20px;">Async Portal</h2>
+                <input type="text" id="key-input" placeholder="Введите лицензионный ключ" style="width: 100%; padding: 12px; margin-bottom: 15px; background: #1a1a1a; border: 1px solid #444; color: white; border-radius: 8px;">
+                <button id="auth-btn" style="width: 100%; padding: 12px; background: #b967ff; color: white; border: none; border-radius: 8px; cursor: pointer;">Войти</button>
             </div>
         </div>
     `;
 
-    // Логика нажатия для шага 2
-    if(step === 2) {
-        document.getElementById('submit-key').onclick = () => {
-            localStorage.setItem('is_authenticated', 'true');
-            initApp();
-        };
-    }
+    document.getElementById('auth-btn').onclick = () => {
+        // Тут можно добавить проверку ключа
+        localStorage.setItem('is_authenticated', 'true');
+        location.reload(); // Перезагружаем страницу, чтобы скрыть оверлей
+    };
 }
 
-function loadMainApp() {
-    const root = document.getElementById('root');
-    // Тут загружаешь свою панель (можно вставить html-код прямо сюда или подгрузить файл)
-    root.innerHTML = `
-        <div class="app-container">
-            <!-- Твой HTML панели управления -->
-            <h1>Dashboard</h1>
-            <p>Welcome to Async.</p>
-        </div>
-    `;
-    // Тут инициализируешь свои скрипты панели (router, nav и т.д.)
-}
-
-// Запуск при открытии
-initApp();
+checkAuth();
