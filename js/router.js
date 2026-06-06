@@ -1,3 +1,4 @@
+// js/router.js
 import { renderDashboard } from '../main/dashboard.js';
 import { renderStudio } from '../main/studio.js';
 import { renderSettings } from '../main/settings.js';
@@ -8,54 +9,47 @@ const pages = {
     'settings': renderSettings
 };
 
+// Функция инициализации роутера, которую мы вызовем после проверки авторизации
 export function initRouter() {
-    document.querySelectorAll('.nav-item').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const page = e.currentTarget.dataset.page;
-            if (pages[page]) {
-                // Очищаем активные классы
-                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-                // Добавляем активный класс нажатой кнопке
-                e.currentTarget.classList.add('active');
-                // Рендерим страницу
-                pages[page]();
-            }
+    const navItems = document.querySelectorAll('.nav-item');
+    const viewport = document.getElementById('view-port');
+
+    if (!viewport) {
+        console.error("Роутер: Элемент #view-port не найден на странице!");
+        return;
+    }
+
+    navItems.forEach(item => {
+        // Удаляем старые слушатели, если они были (на всякий случай)
+        item.replaceWith(item.cloneNode(true));
+    });
+
+    // Перезапрашиваем элементы после клонирования, чтобы повесить чистые события
+    const freshNavItems = document.querySelectorAll('.nav-item');
+
+    freshNavItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const pageKey = item.getAttribute('data-page');
+            
+            if (!pageKey) return;
+
+            // 1. Переключение активного класса (свечения)
+            freshNavItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+
+            // 2. Плавная анимация контента через opacity
+            viewport.style.opacity = '0';
+
+            // Ждем 300мс (пока идет CSS-анимация), меняем HTML и возвращаем видимость
+            setTimeout(() => {
+                if (pages[pageKey]) {
+                    pages[pageKey](); // Загружаем страницу
+                } else {
+                    // Если функция рендера не найдена в объекте pages
+                    viewport.innerHTML = `<h1 style="text-align:center; margin-top:50px; opacity:0.5;">Вкладка "${pageKey}" еще в разработке</h1>`;
+                }
+                viewport.style.opacity = '1';
+            }, 300);
         });
     });
 }
-
-// Находим все кнопки в меню
-const navItems = document.querySelectorAll('.nav-item');
-const viewport = document.getElementById('view-port');
-
-navItems.forEach(item => {
-    item.addEventListener('click', () => {
-        // 1. ПЕРЕКЛЮЧЕНИЕ СВЕЧЕНИЯ
-        // Убираем класс 'active' у всех кнопок
-        navItems.forEach(i => i.classList.remove('active'));
-        // Добавляем класс 'active' только той, на которую кликнули
-        item.classList.add('active');
-
-        // 2. ПЛАВНАЯ АНИМАЦИЯ КОНТЕНТА
-        const pageKey = item.getAttribute('data-page');
-        
-        // Плавно растворяем текущий контент
-        viewport.style.opacity = '0';
-
-        // Ждем 300мс (пока идет CSS анимация opacity) и меняем HTML
-        setTimeout(() => {
-            if (pages[pageKey]) {
-                pages[pageKey](); // Загружаем новую страницу
-            } else {
-                // Если страницы еще нет, показываем заглушку
-                viewport.innerHTML = `<h1>Вкладка ${pageKey} еще в разработке</h1>`;
-            }
-            
-            // Плавно проявляем новый контент
-            viewport.style.opacity = '1';
-        }, 300);
-    });
-});
-
-// Загружаем Дашборд по умолчанию при открытии сайта
-renderDashboard();
