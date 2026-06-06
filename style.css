@@ -1547,3 +1547,62 @@ body, html {
     transform: translateY(-2px);
     opacity: 0.9;
 }
+
+/* Сброс и база */
+body, html {
+    margin: 0; padding: 0;
+    background-color: #050505;
+    font-family: 'Inter', sans-serif;
+    color: white;
+    height: 100%;
+}
+
+/* Контейнер страницы логина */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(circle at 50% 50%, rgba(185, 103, 255, 0.08) 0%, #050505 70%);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 380px;
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 28px;
+    padding: 45px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+
+/* Элементы внутри */
+.auth-title { font-size: 24px; margin-bottom: 8px; }
+.auth-subtitle { color: rgba(255,255,255,0.4); font-size: 14px; margin-bottom: 30px; }
+
+.modern-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    background: #b967ff;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 15px;
+}
+.modern-btn:hover { background: #a558e6; transform: translateY(-2px); }
+
+.modern-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 14px;
+    color: white;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
