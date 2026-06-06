@@ -1814,3 +1814,15 @@ body, html {
     height: 18px;
     flex-shrink: 0; /* Не дает иконке сжиматься */
 }
+
+.profile-card.empty {
+    display: flex;
+    flex-direction: column; /* Иконка сверху, текст снизу */
+    align-items: center;    /* Центрирует по горизонтали */
+    justify-content: center; /* Центрирует по вертикали */
+    padding: 30px;
+}
+
+.profile-card.empty .icon-box {
+    margin-bottom: 10px; /* Отступ между иконкой и надписью */
+}
