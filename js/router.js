@@ -3,53 +3,45 @@ import { renderDashboard } from '../main/dashboard.js';
 import { renderStudio } from '../main/studio.js';
 import { renderSettings } from '../main/settings.js';
 
+// Объект со всеми страницами. 
+// Ключи ДОЛЖНЫ совпадать с data-page="..." у твоих кнопок в HTML!
 const pages = {
     'dashboard': renderDashboard,
     'studio': renderStudio,
     'settings': renderSettings
 };
 
-// Функция инициализации роутера, которую мы вызовем после проверки авторизации
 export function initRouter() {
     const navItems = document.querySelectorAll('.nav-item');
     const viewport = document.getElementById('view-port');
 
     if (!viewport) {
-        console.error("Роутер: Элемент #view-port не найден на странице!");
+        console.error("Роутер: #view-port не найден на странице!");
         return;
     }
 
+    // Вешаем один чистый обработчик на каждую кнопку
     navItems.forEach(item => {
-        // Удаляем старые слушатели, если они были (на всякий случай)
-        item.replaceWith(item.cloneNode(true));
-    });
-
-    // Перезапрашиваем элементы после клонирования, чтобы повесить чистые события
-    const freshNavItems = document.querySelectorAll('.nav-item');
-
-    freshNavItems.forEach(item => {
-        item.addEventListener('click', (e) => {
+        // Убираем старые слушатели перед добавлением нового, чтобы ничего не дублировалось
+        item.onclick = (e) => {
             const pageKey = item.getAttribute('data-page');
-            
             if (!pageKey) return;
 
-            // 1. Переключение активного класса (свечения)
-            freshNavItems.forEach(i => i.classList.remove('active'));
+            // 1. Переключаем активный класс подсветки в сайдбаре
+            navItems.forEach(i => i.classList.remove('active'));
             item.classList.add('active');
 
-            // 2. Плавная анимация контента через opacity
+            // 2. Анимация плавного переключения контента
             viewport.style.opacity = '0';
 
-            // Ждем 300мс (пока идет CSS-анимация), меняем HTML и возвращаем видимость
             setTimeout(() => {
                 if (pages[pageKey]) {
-                    pages[pageKey](); // Загружаем страницу
+                    pages[pageKey](); // Рендерим нужную страницу
                 } else {
-                    // Если функция рендера не найдена в объекте pages
-                    viewport.innerHTML = `<h1 style="text-align:center; margin-top:50px; opacity:0.5;">Вкладка "${pageKey}" еще в разработке</h1>`;
+                    viewport.innerHTML = `<h1 style="text-align:center; margin-top:50px; opacity:0.3; font-family:sans-serif;">Вкладка "${pageKey}" в разработке</h1>`;
                 }
                 viewport.style.opacity = '1';
-            }, 300);
-        });
+            }, 200); // 200мс на анимацию затухания
+        };
     });
 }
