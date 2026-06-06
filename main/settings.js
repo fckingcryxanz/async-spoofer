@@ -122,15 +122,6 @@ export function renderSettings() {
     }
 }
 
-// Внутри функции сохранения куки или настроек:
-function saveRobloxAccount(data) {
-    // data = { name: "chief", handle: "3xtiga", id: "9898069926", avatarUrl: "ссылка_на_аватар" }
-    localStorage.setItem('roblox_account', JSON.stringify(data));
-    
-    // После сохранения можно обновить дашборд, если пользователь вернется на него
-    alert("Аккаунт успешно привязан!");
-}
-
 // Рендер списка профилей на экран
 function renderProfilesList() {
     const list = document.getElementById('saved-accounts-list');
