@@ -1698,3 +1698,39 @@ body, html {
 .icon-gray { color: rgba(255,255,255,0.3); }
 .line-gray { background: linear-gradient(90deg, rgba(255,255,255,0.4), transparent); }
 
+/* --- Dashboard Layout --- */
+.dashboard-wrapper { padding: 20px; color: white; font-family: 'Inter', sans-serif; }
+
+/* Категории (OVERVIEW, COMMUNITY и т.д.) */
+.category-label { 
+    font-size: 11px; color: #888; letter-spacing: 2px; 
+    text-transform: uppercase; margin: 30px 0 15px 0; display: flex; align-items: center;
+}
+.category-label::before { content: ''; width: 15px; height: 15px; background: #b967ff; margin-right: 10px; border-radius: 3px; }
+
+/* Главный хэдер */
+.main-header { 
+    background: linear-gradient(135deg, #1a1a2e 0%, #050505 100%); 
+    padding: 30px; border-radius: 15px; border: 1px solid #333; 
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+}
+
+/* Сетка карточек */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+.card { 
+    background: #111; padding: 20px; border-radius: 12px; 
+    border: 1px solid #222; transition: 0.3s;
+}
+.card:hover { border-color: #b967ff; }
+.card h3 { font-size: 12px; color: #888; margin-bottom: 10px; }
+.card p { font-size: 24px; font-weight: bold; margin: 0; }
+
+/* Roblox Card */
+.roblox-card { 
+    background: #111; padding: 20px; border-radius: 12px; border: 1px solid #222;
+    display: flex; align-items: center; gap: 20px;
+}
+.roblox-avatar { width: 50px; height: 50px; border-radius: 10px; background: #222; }
+
+/* Status Grid (внизу) */
+.status-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
