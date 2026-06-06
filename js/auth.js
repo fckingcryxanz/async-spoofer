@@ -52,5 +52,54 @@ function renderStep2() {
         <button id="auth-submit" class="auth-btn">Authenticate</button>
         <button id="free-btn" style="background:none; border:none; color: rgba(255,255,255,0.3); width:100%; margin-top:15px; cursor:pointer;">Use Free Version</button>
     `;
-    // Тут ты вешаешь обработчики событий (onclick) на эти ID после рендера, как делал раньше
+    function setupStep2Logic() {
+    const inputField = document.getElementById('license-key-field');
+    const charCounter = document.getElementById('char-counter');
+    const submitBtn = document.getElementById('submit-license-btn');
+    const freeBtn = document.getElementById('activate-free-btn');
+
+    if (inputField && charCounter) {
+        inputField.oninput = () => {
+            const len = inputField.value.length;
+            charCounter.innerText = `${len} CHARS`;
+        };
+    }
+
+    // Клик по кнопке активации ключа
+    if (submitBtn) {
+        submitBtn.onclick = () => {
+            if (!inputField || inputField.value.trim() === "") {
+                inputField.style.borderColor = "#ff4a4a";
+                setTimeout(() => inputField.style.borderColor = "rgba(255,255,255,0.08)", 1000);
+                return;
+            }
+
+            submitBtn.innerText = 'Verifying...';
+            submitBtn.style.opacity = '0.6';
+
+            setTimeout(() => {
+                localStorage.setItem('is_authenticated', 'true');
+                checkAuthAndRoute();
+            }, 1200);
+        };
+    }
+
+    // Клик по кнопке бесплатной версии
+    if (freeBtn) {
+        freeBtn.onclick = () => {
+            freeBtn.innerText = 'Loading Free Version...';
+            freeBtn.style.opacity = '0.6';
+
+            setTimeout(() => {
+                localStorage.setItem('is_authenticated', 'true');
+                checkAuthAndRoute();
+            }, 800);
+        };
+    }
+}
+
+// Слушатель инициализации
+document.addEventListener('DOMContentLoaded', () => {
+    checkAuthAndRoute();
+});
 }
