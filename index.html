@@ -2,43 +2,40 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>async-web</title>
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/tThnpc46/logo-Photoroom.png">
+    <title>Async</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/main.css">
+    <style>
+        /* Базовое скрытие */
+        .hidden { display: none !important; }
+    </style>
 </head>
 <body>
 
-    <!-- ШТОРКА АВТОРИЗАЦИИ (Закрывает панель, пока не введешь данные) -->
-    <div id="auth-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: #050505;"></div>
-
-    <!-- ТВОЯ ПАНЕЛЬ (Она всегда здесь, просто скрыта шторкой) -->
-    <div class="app-container">
-        <aside class="sidebar">
-            <div class="sidebar-logo-block">
-                <img src="https://i.postimg.cc/L41NZ4nD/logo.png" alt="Async Logo" class="custom-sidebar-logo">
-                <span class="sidebar-brand-text">Async</span>
-            </div>
-
-            <div class="nav-group">
-                <label>MAIN</label>
-                <div class="nav-item active" data-page="dashboard"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></div><span>Dashboard</span></div>
-                <div class="nav-item" data-page="tutorial"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l14 9-14 9V3z"/></svg></div><span>Tutorial</span></div>
-                <div class="nav-item" data-page="studio"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><span>Studio</span></div>
-            </div>
-
-            <div class="nav-group">
-                <label>CONFIG</label>
-                <div class="nav-item" data-page="hub"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><span>Hub</span></div>
-                <div class="nav-item" data-page="settings"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><span>Settings</span></div>
-            </div>
-        </aside>
-
-        <main id="view-port"></main>
+    <!-- ЭКРАН ЛОГИНА -->
+    <div id="login-container" class="login-page">
+        <div class="auth-card">
+            <h2>Async Portal</h2>
+            <input type="text" id="license-key" class="modern-input" placeholder="Введите ключ">
+            <button id="login-btn" class="modern-btn">Войти</button>
+        </div>
     </div>
 
-    <!-- Твои скрипты (подключаем в конце, как раньше) -->
-    <script type="module" src="js/router.js"></script>
-    <script type="module" src="js/auth.js"></script>
+    <!-- ОСНОВНАЯ ПАНЕЛЬ -->
+    <div id="app-container" class="hidden">
+        <div class="app-wrapper">
+            <aside class="sidebar">
+                <!-- Твой сайдбар -->
+                <div class="nav-item active" data-page="dashboard">Dashboard</div>
+                <div class="nav-item" data-page="tutorial">Tutorial</div>
+                <div class="nav-item" data-page="studio">Studio</div>
+            </aside>
+            <main id="view-port">
+                <h1>Главная</h1>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/router.js"></script>
 </body>
 </html>
