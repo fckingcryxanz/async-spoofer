@@ -1,3 +1,4 @@
+// js/dashboard.js
 export function renderDashboard() {
     const viewport = document.getElementById('view-port');
     if (!viewport) return;
@@ -61,4 +62,57 @@ export function renderDashboard() {
                         <div class="card-top-row">
                             <span class="card-label">UPLOADED</span>
                             <div class="card-icon-box icon-cyan">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                        </div>
+                        <h2>${stats.uploaded}</h2>
+                        <div class="card-glow-line line-cyan"></div>
+                    </div>
+
+                    <div class="dash-card card-red">
+                        <div class="card-top-row">
+                            <span class="card-label">FAILED</span>
+                            <div class="card-icon-box icon-red">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </div>
+                        </div>
+                        <h2>${stats.failed}</h2>
+                        <div class="card-glow-line line-red"></div>
+                    </div>
+
+                    <div class="dash-card card-gray">
+                        <div class="card-top-row">
+                            <span class="card-label">LAST RUN</span>
+                            <div class="card-icon-box icon-gray">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            </div>
+                        </div>
+                        <h2 style="font-size: 20px; font-weight: 700; margin-top: 15px;">${stats.lastRun}</h2>
+                        <div class="card-glow-line line-gray"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-bottom: 30px;">
+                <div class="section-title" style="font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 2px; display: flex; align-items: center; gap: 8px; margin-bottom: 15px; text-transform: uppercase;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    ROBLOX ACCOUNT
+                </div>
+                
+                <div class="roblox-account-bar" style="background: rgba(20, 19, 26, 0.5); border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px);">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <img src="${user.avatarUrl}" alt="Avatar" style="width: 44px; height: 44px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+                        <div>
+                            <div style="font-size: 16px; font-weight: 700; color: #fff;">${user.name} (@${user.handle})</div>
+                            <div style="font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 2px;">ID: ${user.id}</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 6px; background: rgba(0, 255, 136, 0.06); border: 1px solid rgba(0, 255, 136, 0.15); padding: 5px 12px; border-radius: 20px;">
+                        <span style="width: 6px; height: 6px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 8px #00ff88;"></span>
+                        <span style="font-size: 11px; color: #00ff88; font-weight: bold; letter-spacing: 0.5px;">Online</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    `;
+}
