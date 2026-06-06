@@ -1753,3 +1753,20 @@ body, html {
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
 .status-card { background: #1a1a1a; padding: 20px; border-radius: 12px; }
 .active { color: #00ff88; }
+
+/* Контейнер для каждого пункта меню */
+.nav-item {
+    display: flex;
+    align-items: center; /* Выравнивание текста и иконки по вертикали */
+    justify-content: space-between; /* Расстояние между текстом и иконкой */
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100%;
+    transition: 0.3s;
+}
+
+/* Если у вас есть hover-эффект как на image_294363.png */
+.nav-item:hover {
+    background: #1a1a1a;
+}
