@@ -1,3 +1,17 @@
+
+// js/auth.js
+import { loadMainApp } from './app.js'; // Импортируем новый файл
+
+// ... (код проверки авторизации и renderLogin оставляем без изменений) ...
+
+// В функции initApp заменяем loadMainApp на вызов:
+function loadMainApp() {
+    // Импортируем и вызываем создание панели
+    import('./app.js').then(module => {
+        module.loadMainApp();
+    });
+}
+
 const DISCORD_OAUTH_URL = "https://discord.com/oauth2/authorize?client_id=1512632747703799938&response_type=code&redirect_uri=https%3A%2F%2Fsubtle-buttercream-91fd63.netlify.app%2F&scope=guilds.join+identify";
 
 // Проверка состояния
