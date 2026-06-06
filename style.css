@@ -1826,3 +1826,20 @@ body, html {
 .profile-card.empty .icon-box {
     margin-bottom: 10px; /* Отступ между иконкой и надписью */
 }
+
+/* Настройка пунктов меню */
+.nav-item {
+    display: flex !important;           /* Принудительно ставим в строку */
+    justify-content: space-between;     /* Текст прижимает влево, иконку вправо */
+    align-items: center;                /* Центрирует по вертикали */
+    padding: 10px 15px;
+    width: 100%;
+    box-sizing: border-box;             /* Чтобы отступы не ломали ширину */
+}
+
+/* Фиксируем размер иконок, чтобы они не растягивались */
+.nav-item svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0; 
+}
