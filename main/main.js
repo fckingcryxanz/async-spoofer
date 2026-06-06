@@ -1,20 +1,30 @@
+// Импортируем все функции рендеринга из соседних файлов
 import { renderDashboard } from './dashboard.js';
+import { renderTutorial } from './tutorial.js';
+import { renderStudio } from './studio.js';
+import { renderHub } from './hub.js';
 import { renderSettings } from './settings.js';
 
 export const MainModule = {
     init: () => {
-        console.log("Main Module Loaded");
+        // Список всех твоих страниц и кнопок
+        const routes = [
+            { id: 'nav-dashboard', path: '/dash', render: renderDashboard },
+            { id: 'nav-tutorial', path: '/tutorial', render: renderTutorial },
+            { id: 'nav-studio', path: '/studio', render: renderStudio },
+            { id: 'nav-hub', path: '/hub', render: renderHub },
+            { id: 'nav-settings', path: '/settings', render: renderSettings }
+        ];
 
-        // Подключаем события здесь, внутри метода init
-        const navDash = document.getElementById('nav-dashboard');
-        if (navDash) {
-            navDash.onclick = () => MainModule.navigate('/dash', renderDashboard);
-        }
-
-        const navSettings = document.getElementById('nav-settings');
-        if (navSettings) {
-            navSettings.onclick = () => MainModule.navigate('/settings', renderSettings);
-        }
+        // Автоматически назначаем события на все кнопки
+        routes.forEach(route => {
+            const element = document.getElementById(route.id);
+            if (element) {
+                element.onclick = () => MainModule.navigate(route.path, route.render);
+            }
+        });
+        
+        console.log("Main Module Loaded & Routes Initialized");
     },
 
     navigate: (path, renderFunction) => {
