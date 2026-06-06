@@ -1,8 +1,5 @@
 import { MainModule } from '../main/main.js';
 
-// Когда нужно перейти на страницу:
-MainModule.navigate('/settings', renderSettings);
-
 export function renderDashboard() {
     // Устанавливаем правильный путь
     window.history.pushState(null, null, '/dash');
