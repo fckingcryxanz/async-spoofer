@@ -1625,3 +1625,76 @@ body, html {
 /* Шапка */
 .dashboard-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
 .badge-free { font-size: 10px; background: #222; padding: 2px 6px; border-radius: 4px; vertical-align: middle; }
+
+/* Стили для кастомных карточек дашборда Async */
+.dash-card {
+    background: #14131a;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 14px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dash-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.card-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.dash-card h2 {
+    margin: 15px 0 10px 0;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.card-icon-box {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+.card-glow-line {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    border-radius: 2px;
+}
+
+/* Свечение и цвета для каждой отдельной карточки */
+.card-purple h2 { color: #8a2be2; text-shadow: 0 0 15px rgba(138,43,226,0.3); }
+.icon-purple { color: #8a2be2; }
+.line-purple { background: linear-gradient(90deg, #8a2be2, transparent); }
+
+.card-cyan h2 { color: #00e5ff; text-shadow: 0 0 15px rgba(0,229,255,0.3); }
+.icon-cyan { color: #00e5ff; }
+.line-cyan { background: linear-gradient(90deg, #00e5ff, transparent); }
+
+.card-red h2 { color: #ff3366; text-shadow: 0 0 15px rgba(255,51,102,0.3); }
+.icon-red { color: #ff3366; }
+.line-red { background: linear-gradient(90deg, #ff3366, transparent); }
+
+.card-gray h2 { color: #ffffff; }
+.icon-gray { color: rgba(255,255,255,0.3); }
+.line-gray { background: linear-gradient(90deg, rgba(255,255,255,0.4), transparent); }
+
