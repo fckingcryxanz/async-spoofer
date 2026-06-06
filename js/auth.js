@@ -1,6 +1,7 @@
 // js/auth.js
 
-// ⚠️ ВАЖНО: Замени эту ссылку на ту, которую сгенерировал в Discord Developer Portal (OAuth2 -> URL Generator)
+import { initRouter } from './router.js';
+
 const DISCORD_OAUTH_URL = "https://discord.com/oauth2/authorize?client_id=1512632747703799938&permissions=8&response_type=code&redirect_uri=https%3A%2F%2Fsubtle-buttercream-91fd63.netlify.app%2F&integration_type=0&scope=identify+bot+guilds.join"; 
 
 export function checkAuthAndRoute() {
@@ -28,37 +29,40 @@ export function checkAuthAndRoute() {
         }
         // Рисуем экран входа
         renderLoginScreen();
-    } else {
+} else {
         // ЕСЛИ АВТОРИЗОВАН:
-        // Удаляем экран входа, если он вдруг отрисован
         const loginWrapper = document.getElementById('login-screen-element');
         if (loginWrapper) loginWrapper.remove();
 
-        // Показываем панель управления
         if (mainAppContainer) {
-            mainAppContainer.style.display = 'flex'; // возвращаем flex, чтобы сайдбар и контент встали на места
+            mainAppContainer.style.display = 'flex'; 
         }
 
-        // 3. Синхронизация с твоим router.js
-        // Даем небольшую задержку (100мс), чтобы твой router.js успел загрузиться и повесить события на кнопки
+        // Инициализируем роутер, чтобы кнопки стали кликабельными!
+        initRouter();
+
+        // Синхронизация вкладок и авто-клик
         setTimeout(() => {
             const currentPath = window.location.pathname;
             
+            // Ищем кнопку по её data-page атрибуту (так надежнее, чем по ID)
+            let targetTab = document.querySelector(`.nav-item[data-page="dashboard"]`);
+
             if (currentPath === '/settings') {
-                document.getElementById('tab-settings')?.click();
+                targetTab = document.querySelector('.nav-item[data-page="settings"]');
             } else if (currentPath === '/studio') {
-                document.getElementById('tab-studio')?.click();
-            } else if (currentPath === '/hub') {
-                document.getElementById('tab-hub')?.click();
-            } else if (currentPath === '/tutorial') {
-                document.getElementById('tab-tutorial')?.click();
-            } else {
-                // Если мы просто на главной странице (/) — кликаем по Dashboard
-                document.getElementById('tab-dashboard')?.click(); 
+                targetTab = document.querySelector('.nav-item[data-page="studio"]');
             }
-        }, 100);
+
+            if (targetTab) {
+                targetTab.click();
+            } else {
+                // Если ничего не подошло или мы на панели, принудительно открываем Dashboard
+                const defaultTab = document.querySelector('.nav-item[data-page="dashboard"]');
+                if (defaultTab) defaultTab.click();
+            }
+        }, 50);
     }
-}
 
 // Функция отрисовки меню входа
 function renderLoginScreen() {
