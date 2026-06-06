@@ -115,4 +115,9 @@ export function renderDashboard() {
             </section>
         </div>
     `;
+
+    // Жёстко заставляем браузер показать контент, убирая прозрачность и скрытие
+    viewport.style.opacity = '1';
+    viewport.style.display = 'block'; 
+    viewport.style.visibility = 'visible';
 }
