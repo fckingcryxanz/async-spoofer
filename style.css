@@ -1195,3 +1195,19 @@ body, input, button, label, h1, h2, p, span {
     justify-content: center;
     gap: 8px;
 }
+
+/* --- СБРОС КРИВОГО ШРИФТА ДЛЯ СТУДИИ --- */
+#session-id,
+#tab-anim-btn,
+#tab-audio-btn,
+#scan-status-text {
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif !important;
+    text-transform: none !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* На всякий случай фиксируем правильный шрифт внутри кнопок переключения */
+.studio-main-hub .custom-input {
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif !important;
+    text-transform: none !important;
+}
