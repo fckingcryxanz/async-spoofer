@@ -11,31 +11,13 @@
 </head>
 <body>
 
-    <!-- ЭКРАН ЛОГИНА -->
-    <div id="login-container" class="login-page">
-        <div class="auth-card">
-            <h2>Async Portal</h2>
-            <input type="text" id="license-key" class="modern-input" placeholder="Введите ключ">
-            <button id="login-btn" class="modern-btn">Войти</button>
-        </div>
+<!-- ЭТА ШТОРКА ЗАКРЫВАЕТ ВСЁ, ПОКА ТЫ НЕ ВОЙДЕШЬ -->
+<div id="auth-gate" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: #050505; display: flex; justify-content: center; align-items: center;">
+    <div style="text-align: center; color: white;">
+        <h2 style="margin-bottom: 20px; font-family: sans-serif;">Async Login</h2>
+        <input type="text" id="key-input" placeholder="Введите ключ" style="padding: 10px; border-radius: 5px; border: 1px solid #333; background: #111; color: white;">
+        <button id="gate-btn" style="padding: 10px 20px; background: #b967ff; border: none; color: white; border-radius: 5px; cursor: pointer;">Войти</button>
     </div>
-
-    <!-- ОСНОВНАЯ ПАНЕЛЬ -->
-    <div id="app-container" class="hidden">
-        <div class="app-wrapper">
-            <aside class="sidebar">
-                <!-- Твой сайдбар -->
-                <div class="nav-item active" data-page="dashboard">Dashboard</div>
-                <div class="nav-item" data-page="tutorial">Tutorial</div>
-                <div class="nav-item" data-page="studio">Studio</div>
-            </aside>
-            <main id="view-port">
-                <h1>Главная</h1>
-            </main>
-        </div>
-    </div>
-
-    <script src="js/auth.js"></script>
-    <script src="js/router.js"></script>
+</div>
 </body>
 </html>
