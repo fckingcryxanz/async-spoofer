@@ -1,29 +1,54 @@
-// public/modules/main/dashboard.js
 import { MainModule } from './main.js';
 
 export function renderDashboard() {
     const viewport = document.getElementById('view-port');
     
-    const content = `
-        <div class="dashboard-grid">
-            ${MainModule.createCard("Status", "<span class='status-online'>Connected to Roblox</span>")}
-            ${MainModule.createCard("Spoofed Audios", "<h2 class='stat-number'>124</h2>")}
-            ${MainModule.createCard("Active Sessions", "<p>Studio Instance: #4920</p>")}
+    // Пытаемся получить данные аккаунта
+    const robloxData = JSON.parse(localStorage.getItem('roblox_account'));
+
+    // Блок Roblox Account (рендерится только если данные есть)
+    const robloxAccountSection = robloxData ? `
+        <div class="section-label">ROBLOX ACCOUNT</div>
+        <div class="roblox-card">
+            <img src="${robloxData.avatarUrl}" alt="Avatar" class="roblox-avatar">
+            <div class="roblox-info">
+                <h3>${robloxData.name} (@${robloxData.handle})</h3>
+                <p>ID: ${robloxData.id}</p>
+            </div>
+            <div class="status-badge"><span class="dot">●</span> Online</div>
         </div>
-        <div class="recent-activity">
-            <h3>Recent Spoofs</h3>
-            <ul class="activity-list">
-                <li><span>Explosion.mp3</span> <small>2 mins ago</small></li>
-                <li><span>Sword_Slash.wav</span> <small>15 mins ago</small></li>
-            </ul>
-        </div>
-    `;
-    
+    ` : '';
+
     viewport.innerHTML = `
-        <div class="view-header">
-            <h1>Welcome back, Developer</h1>
-            <p>Everything is running smoothly.</p>
+        <div class="dashboard-header">
+            <div class="header-left">
+                <h1>ECLIPSE <span class="badge-free">FREE</span></h1>
+                <p>Web Edition — Spoof anything, anywhere</p>
+            </div>
+            <div class="header-version">VERSION <span>2.6.0</span></div>
         </div>
-        ${content}
+
+        <div class="dashboard-grid">
+            ${MainModule.createCard("TOTAL RUNS", "0")}
+            ${MainModule.createCard("UPLOADED", "0")}
+            ${MainModule.createCard("FAILED", "0")}
+            ${MainModule.createCard("LAST RUN", "Never")}
+        </div>
+
+        <div class="community-card">
+            <div class="community-text">
+                <h3>ECLIPSE COMMUNITY</h3>
+                <p><strong>1.1M</strong> Assets Spoofed &nbsp; <strong>374</strong> Current Users</p>
+            </div>
+        </div>
+
+        ${robloxAccountSection}
+
+        <div class="section-label">ACCOUNT STATUS</div>
+        <div class="status-grid">
+            <div class="stat-box"><span>API KEY</span><h3 style="color: #00ff88;">Active</h3></div>
+            <div class="stat-box"><span>USER ID</span><h3>${robloxData ? robloxData.id : 'N/A'}</h3></div>
+            <div class="stat-box"><span>UPLOAD TARGET</span><h3>Personal</h3></div>
+        </div>
     `;
 }
