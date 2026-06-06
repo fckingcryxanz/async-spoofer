@@ -8,6 +8,11 @@ const pages = {
     'settings': renderSettings
 };
 
+export function navigateTo(path) {
+    window.history.pushState(null, null, path);
+    // Здесь должен быть вызов функции рендеринга соответствующей страницы
+}
+
 export function initRouter() {
     document.querySelectorAll('.nav-item').forEach(link => {
         link.addEventListener('click', (e) => {
