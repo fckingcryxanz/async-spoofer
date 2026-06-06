@@ -1076,21 +1076,72 @@ body, input, button, label, h1, h2, p, span {
 
 /* --- ИСПРАВЛЕНИЕ ЧИТАЕМОСТИ ДЛЯ ВАЖНЫХ ДАННЫХ --- */
 
-/* 1. Возвращаем понятный шрифт для всех полей ввода */
-input {
+/* --- ПОЛНОЕ ИСПРАВЛЕНИЕ ШРИФТА ДЛЯ СОХРАНЕННЫХ АККАУНТОВ --- */
+.profile-item-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    
+    /* ВОТ ЭТИ ДВЕ СТРОКИ ВСЁ ИСПРАВЛЯЮТ: */
     font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    letter-spacing: 0.5px; /* Немного раздвигаем буквы для лучшей читаемости */
+    text-transform: none !important; /* Запрещает шрифту делать все буквы заглавными */
 }
 
-/* 2. Делаем моноширинный шрифт специально для полей с Cookie и API ключами (чтобы i, l, 1 точно отличались) */
-#cookie-input, 
-#api-key-input, 
-#userid-input {
-    font-family: 'Consolas', 'Courier New', monospace !important;
+/* Принудительно применяем нормальный шрифт ко всем текстовым блокам внутри карточки */
+.profile-item-card * {
+    font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    text-transform: none !important;
 }
 
-/* 3. Возвращаем читаемый шрифт для статуса профиля (где пишется User ID и Key под именем) */
-.profile-item-card div[style*="font-size:11px"] {
-    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif !important;
-    letter-spacing: 0.3px;
+.avatar-circle {
+    width: 35px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #fff;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+/* Неоновый зеленый рестарт (UPDATE) */
+.update-btn:hover {
+    color: #00ff88;
+    filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.8));
+}
+.update-btn svg {
+    transition: transform 0.4s ease;
+}
+.update-btn:hover svg {
+    transform: rotate(180deg);
+}
+
+/* Неоновый красный крестик (DELETE) */
+.delete-btn:hover {
+    color: #ff3366;
+    filter: drop-shadow(0 0 8px rgba(255, 51, 102, 0.8));
 }
