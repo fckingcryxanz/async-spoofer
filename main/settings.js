@@ -3,36 +3,18 @@ export function renderSettings() {
     if (!viewport) return;
 
     viewport.innerHTML = `
-        <div class="page-transition">
-            <div class="view-header">
-                <h1>Settings</h1>
-                <p>Configure your Roblox identity and API access</p>
-            </div>
+        <div class="settings-container">
+            <!-- Секция ACCOUNT PROFILES включает в себя и список, и форму -->
+            <section class="settings-group">
+                <div class="section-divider"><span>ACCOUNT PROFILES</span></div>
+                
+                <!-- Список профилей -->
+                <div id="saved-accounts-list"></div>
 
-            <div class="settings-container">
-                <section class="settings-group">
-                    <div class="section-divider">
-                        <span>SAVED ACCOUNTS</span>
-                        <div class="line"></div>
-                    </div>
-                    <div id="saved-accounts-list"></div>
-                </section>
-
-                <section class="settings-group">
-                    <div class="section-divider">
-                        <div class="icon-box">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                        </div>
-                        <span>ACCOUNT PROFILES</span>
-                        <div class="line"></div>
-                    </div>
-                    <div class="glass-card settings-card">
-                        <div class="input-row">
-                            <input type="text" id="profile-name-input" class="custom-input small-input" placeholder="Profile name (e.g. Main Account)">
-                            <button id="save-profile-btn" class="save-btn">Save Profile</button>
-                        </div>
-                    </div>
-                </section>
+                <!-- Форма создания -->
+                <div class="glass-card settings-card" style="margin-top: 20px;">
+                    <input type="text" id="profile-name-input" placeholder="Profile name" class="custom-input">
+                    <button id="save-profile-btn" class="save-btn" style="width: 100%; margin-top:10px;">Save Profile</button>
 
                 <section class="settings-group">
                     <div class="section-divider">
@@ -90,6 +72,65 @@ export function renderSettings() {
     
     const getApiBtn = document.getElementById('get-api-btn');
     if (getApiBtn) getApiBtn.onclick = () => window.open('https://create.roblox.com/dashboard/credentials', '_blank');
+}
+
+function renderProfilesList() {
+    const list = document.getElementById('saved-accounts-list');
+    list.innerHTML = ''; // Очищаем
+
+    profiles.forEach((p, index) => {
+        const item = document.createElement('div');
+        item.className = 'profile-card';
+        
+        // Маскируем API ключ
+        const maskedKey = p.apiKey ? '••••••••' : 'No key';
+        
+        item.innerHTML = `
+            <div>
+                <div style="font-weight:bold">${p.name}</div>
+                <div style="font-size:11px; opacity:0.6">ID: ${p.userId || 'None'} · Key: ${maskedKey}</div>
+            </div>
+            <div style="display:flex; gap:10px;">
+                <button class="icon-btn" onclick="updateProfile(${index})">
+                    <svg class="refresh-icon" width="20" height="20" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 8-8v3l4-4-4-4v3a9 9 0 0 0-9 9h2z"/></svg>
+                </button>
+                <button class="icon-btn" onclick="deleteProfile(${index})">
+                    <svg class="delete-icon" width="20" height="20" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+        `;
+        list.appendChild(item);
+    });
+}
+
+function setupProfileLogic() {
+    // Делаем функции глобальными, чтобы они работали из inline onclick
+    window.updateProfile = (index) => {
+        // Берем актуальные данные из инпутов (нужно, чтобы они были заполнены)
+        const newUserId = document.getElementById('userid-input')?.value;
+        const newKey = document.getElementById('api-key-input')?.value;
+        
+        profiles[index].userId = newUserId || profiles[index].userId;
+        profiles[index].apiKey = newKey || profiles[index].apiKey;
+        renderProfilesList();
+    };
+
+    window.deleteProfile = (index) => {
+        profiles.splice(index, 1);
+        renderProfilesList();
+    };
+
+    document.getElementById('save-profile-btn').onclick = () => {
+        const name = document.getElementById('profile-name-input').value;
+        if (!name) return alert("Введите имя!");
+        
+        profiles.push({
+            name: name,
+            userId: document.getElementById('userid-input')?.value,
+            apiKey: document.getElementById('api-key-input')?.value
+        });
+        renderProfilesList();
+    };
 }
 
 // ФУНКЦИЯ СОХРАНЕНИЯ ПРОФИЛЯ
