@@ -1734,3 +1734,22 @@ body, html {
 
 /* Status Grid (внизу) */
 .status-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+
+/* Общие настройки */
+.category-label { color: #888; font-size: 12px; margin: 30px 0 15px; text-transform: uppercase; }
+
+/* Сетка для Overview (4 колонки) */
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+.stat-card { background: #1a1a1a; padding: 20px; border-radius: 12px; position: relative; }
+.icon-box { position: absolute; top: 20px; right: 20px; opacity: 0.5; }
+
+/* Профиль игрока */
+.profile-card { background: #1a1a1a; padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; }
+.profile-card.empty { justify-content: center; color: #666; }
+.profile-card img { width: 45px; height: 45px; border-radius: 8px; }
+.status-badge { margin-left: auto; color: #00ff88; font-size: 12px; }
+
+/* Статус аккаунта (3 колонки) */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.status-card { background: #1a1a1a; padding: 20px; border-radius: 12px; }
+.active { color: #00ff88; }
