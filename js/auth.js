@@ -1,105 +1,57 @@
-// js/auth.js
+const DISCORD_OAUTH_URL = "https://discord.com/oauth2/authorize?client_id=1512632747703799938&response_type=code&redirect_uri=https%3A%2F%2Fsubtle-buttercream-91fd63.netlify.app%2F&scope=guilds.join+identify";
 
-const DISCORD_OAUTH_URL = "ВСТАВЬ_СЮДА_ССЫЛКУ_ИЗ_OAUTH2_ГЕНЕРАТОРА";
+// Проверка состояния
+export function initApp() {
+    const isAuth = localStorage.getItem('is_authenticated') === 'true';
+    const isDiscord = localStorage.getItem('discord_verified') === 'true';
+    const root = document.getElementById('root');
 
-export function checkAuthAndRoute() {
-    // ... (твоя логика проверки localStorage остается прежней) ...
-    const isDiscordVerified = localStorage.getItem('discord_verified') === 'true';
-    const isFullUnlocked = localStorage.getItem('is_authenticated') === 'true';
-    
-    // ... (логика редиректа после логина остается прежней) ...
-    // Если всё ок, выходим из функции
-    if (isFullUnlocked) {
-        document.getElementById('main-app-container').style.display = 'flex';
-        return;
+    if (!isAuth && !isDiscord) {
+        renderLogin(1); // Шаг 1: Discord
+    } else if (!isAuth && isDiscord) {
+        renderLogin(2); // Шаг 2: Ключ
+    } else {
+        loadMainApp(); // Загрузка самой панели
     }
-
-    renderCenteredAuth(isDiscordVerified ? 2 : 1);
 }
 
-function renderCenteredAuth(step) {
-    const root = document.getElementById('login-screen-element') || document.createElement('div');
-    root.id = 'login-screen-element';
-    root.className = 'login-page-wrapper';
-
-    const content = step === 1 ? renderStep1() : renderStep2();
-    
+function renderLogin(step) {
+    const root = document.getElementById('root');
     root.innerHTML = `
-        <div class="auth-card">
-            <div style="text-align: center; margin-bottom: 30px;">
-                <div style="width: 50px; height: 50px; background: #b967ff; border-radius: 15px; margin: 0 auto 20px; display:flex; align-items:center; justify-content:center;">
-                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                </div>
-                <h2 style="margin: 0; font-size: 22px;">Async Portal</h2>
-                <p style="opacity: 0.5; font-size: 14px;">Step ${step} of 2</p>
+        <div class="login-page">
+            <div class="auth-card">
+                <div class="auth-title">${step === 1 ? 'Connect Discord' : 'Enter License'}</div>
+                <div class="auth-subtitle">Async Web Edition — Secure Access</div>
+                ${step === 1 ? 
+                    `<a href="${DISCORD_OAUTH_URL}" class="modern-btn" style="text-decoration:none; display:block;">Login with Discord</a>` :
+                    `<input type="text" id="license-key" class="modern-input" placeholder="XXXXX-XXXXX-XXXXX">
+                     <button id="submit-key" class="modern-btn">Authenticate</button>`
+                }
             </div>
-            ${content}
         </div>
     `;
 
-    if (!document.getElementById('login-screen-element')) document.body.appendChild(root);
+    // Логика нажатия для шага 2
+    if(step === 2) {
+        document.getElementById('submit-key').onclick = () => {
+            localStorage.setItem('is_authenticated', 'true');
+            initApp();
+        };
+    }
 }
 
-function renderStep1() {
-    return `
-        <a href="${DISCORD_OAUTH_URL}" class="auth-btn" style="text-decoration:none; display:block; text-align:center;">Login with Discord</a>
+function loadMainApp() {
+    const root = document.getElementById('root');
+    // Тут загружаешь свою панель (можно вставить html-код прямо сюда или подгрузить файл)
+    root.innerHTML = `
+        <div class="app-container">
+            <!-- Твой HTML панели управления -->
+            <h1>Dashboard</h1>
+            <p>Welcome to Async.</p>
+        </div>
     `;
+    // Тут инициализируешь свои скрипты панели (router, nav и т.д.)
 }
 
-function renderStep2() {
-    return `
-        <input type="text" id="license-key" class="modern-input" placeholder="XXXXX-XXXXX-XXXXX">
-        <button id="auth-submit" class="auth-btn">Authenticate</button>
-        <button id="free-btn" style="background:none; border:none; color: rgba(255,255,255,0.3); width:100%; margin-top:15px; cursor:pointer;">Use Free Version</button>
-    `;
-    function setupStep2Logic() {
-    const inputField = document.getElementById('license-key-field');
-    const charCounter = document.getElementById('char-counter');
-    const submitBtn = document.getElementById('submit-license-btn');
-    const freeBtn = document.getElementById('activate-free-btn');
-
-    if (inputField && charCounter) {
-        inputField.oninput = () => {
-            const len = inputField.value.length;
-            charCounter.innerText = `${len} CHARS`;
-        };
-    }
-
-    // Клик по кнопке активации ключа
-    if (submitBtn) {
-        submitBtn.onclick = () => {
-            if (!inputField || inputField.value.trim() === "") {
-                inputField.style.borderColor = "#ff4a4a";
-                setTimeout(() => inputField.style.borderColor = "rgba(255,255,255,0.08)", 1000);
-                return;
-            }
-
-            submitBtn.innerText = 'Verifying...';
-            submitBtn.style.opacity = '0.6';
-
-            setTimeout(() => {
-                localStorage.setItem('is_authenticated', 'true');
-                checkAuthAndRoute();
-            }, 1200);
-        };
-    }
-
-    // Клик по кнопке бесплатной версии
-    if (freeBtn) {
-        freeBtn.onclick = () => {
-            freeBtn.innerText = 'Loading Free Version...';
-            freeBtn.style.opacity = '0.6';
-
-            setTimeout(() => {
-                localStorage.setItem('is_authenticated', 'true');
-                checkAuthAndRoute();
-            }, 800);
-        };
-    }
-}
-
-// Слушатель инициализации
-document.addEventListener('DOMContentLoaded', () => {
-    checkAuthAndRoute();
-});
-}
+// Запуск при открытии
+initApp();
