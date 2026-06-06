@@ -1357,3 +1357,119 @@ body, input, button, label, h1, h2, p, span {
     padding-top: 20px;
     border-top: 1px solid rgba(255,255,255,0.05);
 }
+
+/* --- СТИЛИ ДЛЯ ШАГА 2: LICENSE KEY --- */
+
+/* Зеленая плашка успешной верификации Discord */
+.verified-badge {
+    background: rgba(0, 255, 136, 0.05);
+    border: 1px solid rgba(0, 255, 136, 0.15);
+    color: #00ff88;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+}
+
+/* Контейнер поля ввода ключа */
+.license-input-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.license-input-wrapper input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 15px 15px 15px 38px;
+    color: #fff;
+    font-family: monospace !important;
+    letter-spacing: 2px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.license-input-wrapper input:focus {
+    border-color: rgba(185, 103, 255, 0.5);
+    outline: none;
+    box-shadow: 0 0 10px rgba(185, 103, 255, 0.2);
+}
+
+/* Фиолетовый неоновый индикатор внутри инпута */
+.license-input-wrapper::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: #b967ff;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #b967ff;
+}
+
+/* Кнопка бесплатной версии */
+.auth-free-btn {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.auth-free-btn:hover {
+    background: rgba(255, 255, 255, 0.02);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Сетка маленьких технических плашек */
+.mini-badge-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.mini-badge {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.35);
+    text-align: center;
+    font-family: monospace;
+    letter-spacing: 0.5px;
+}
+
+/* Карточка покупки ключа в самом низу */
+.store-promo-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+.store-promo-card:hover {
+    background: rgba(185, 103, 255, 0.03);
+    border-color: rgba(185, 103, 255, 0.25);
+}
