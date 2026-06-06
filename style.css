@@ -1843,3 +1843,19 @@ body, html {
     height: 16px;
     flex-shrink: 0; 
 }
+
+/* Рамка для пустого состояния */
+.empty-frame {
+    border: 1px dashed #333; /* Тонкая пунктирная рамка как на фото */
+    border-radius: 12px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column; /* Иконка сверху, текст снизу */
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    background: #111;
+}
+
+.empty-frame svg { margin-bottom: 8px; opacity: 0.5; }
+
