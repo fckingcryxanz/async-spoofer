@@ -2,16 +2,24 @@ import { renderDashboard } from '../main/dashboard.js';
 import { renderStudio } from '../main/studio.js';
 import { renderSettings } from '../main/settings.js';
 
+// Функция для навигации
+function navigate(path, renderFunction) {
+    window.history.pushState(null, null, path);
+    renderFunction(); // Вызов функции отрисовки нужной страницы
+}
+
+// Пример привязки к кнопкам:
+document.getElementById('nav-dashboard').onclick = () => navigate('/dash', renderDashboard);
+document.getElementById('nav-tutorial').onclick = () => navigate('/tutorial', renderTutorial);
+document.getElementById('nav-studio').onclick = () => navigate('/studio', renderStudio);
+document.getElementById('nav-hub').onclick = () => navigate('/hub', renderHub);
+document.getElementById('nav-settings').onclick = () => navigate('/settings', renderSettings);
+
 const pages = {
     'dashboard': renderDashboard,
     'studio': renderStudio,
     'settings': renderSettings
 };
-
-export function navigateTo(path) {
-    window.history.pushState(null, null, path);
-    // Здесь должен быть вызов функции рендеринга соответствующей страницы
-}
 
 export function initRouter() {
     document.querySelectorAll('.nav-item').forEach(link => {
